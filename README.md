@@ -15,30 +15,13 @@
 
 -How to run bot for the first time ?
 
--git clone https://github.com/satriapasa/SatriaJS
+-git clone https://github.com/MrYoung249/bot03
 
--cd alphat-third && npm install
+-cd bot03 && npm install
 
 -insert your admin mid in main.js
 
 -npm start
-
--IMPORTANT
-
--PLEASE DO npm i FOR THIS UPDATE -> #27/10/2017
-
--Still work 👷
--CHANGELOG
-
--Bug fixed (LOG_OUT)
--TO - DO
-
--Nothing
-
--CMD / KEYWORD
-
--type !key for the keyword
-
 
 How to activate AutoLike feature ?
 
