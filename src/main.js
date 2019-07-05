@@ -62,7 +62,29 @@ class LINE extends LineAPI {
 			qr: 0, //0 = Gk boleh, 1 = Boleh
 			salam: 0 //1 = Yes, 0 = No
         }
-		this.keyhelp = "⍟Main Menu\n\•absen\n\•vykhodi\n\•speed\n\•tagall\n\•kepo\n\•msg\n\•banlist\n\•gURL\n\•ginfo\n\⍟Admin Menu\n\•addcontact\n\•adminutil\n\•mute\n\•unmute\n\•refresh\n\•ban\n\•unban\n\•kickban\n\•grouputil\n\•opraken̶\n\⍟Settings\n\";
+		this.keyhelp = "
+		⍟Main Menu\n\
+		•absen\n\
+		•vykhodi\n\
+		•speed\n\
+		•tagall\n\
+		•kepo\n\
+		•msg\n\
+		•banlist\n\
+		•gURL\n\
+		•ginfo\n\
+		⍟Admin Menu\n\
+		•addcontact\n\
+		•adminutil\n\
+		•mute\n\
+		•unmute\n\
+		•refresh\n\
+		•ban\n\
+		•unban\n\
+		•kickban\n\
+		•grouputil\n\
+		•opraken̶\n\
+		⍟Settings\n\";
         var that = this;
     }
     getOprationType(operations) {
@@ -1505,7 +1527,12 @@ Link Download: "+idU.id+"\n";
 		}
 
         if(txt == 'opraken' && this.stateStatus.cancel == 1 && isAdminOrBot(seq.from_)) {
-            this.cancelAll(seq.to);
+        	let { listMember } = await this.searchGroup(seq.to);
+            for (var i = 0; i < listMember.length; i++) {
+                if(!isAdminOrBot(listMember[i].mid)){
+                this.cancelAll(seq.to,[listMember[i].mid]);
+              }
+            }
         }else if(txt == "opraken" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
         if(txt == 'absen') {
@@ -1677,7 +1704,12 @@ Link Download: "+idU.id+"\n";
         }
 
 		if(txt == "tagall" && seq.toType == 2 && !isBanned(banList, seq.from_)){
-			await this.tagAlls(seq);
+            let { listMember } = await this.searchGroup(seq.to);
+            for (var i = 0; i < listMember.length; i++) {
+                if(!isAdminOrBot(listMember[i].mid)){
+                this.tagAlls(seq.to,[listMember[i].mid]);
+              }
+            }
 		}else if(txt == 'tagall' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
 		if(txt == '0103' && lockt == 1){
