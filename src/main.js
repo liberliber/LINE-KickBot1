@@ -83,14 +83,8 @@ class LINE extends LineAPI {
 •unban\n\
 •kickban\n\
 •grouputil\n\
-•o̶p̶r̶a̶k̶e̶n̶\n\
-⍟Settings\n\
-•Autojoin [ON/OFF]\n\
-•Kick [ON/OFF]\n\
-•Protect [ON/OFF]\n\
-•Cancel [ON/OFF]\n\
-•Salam [ON/OFF]\n\
-•QR [ON/OFF]\n\";
+•opraken̶\n\
+⍟Settings\n\";
         var that = this;
     }
     getOprationType(operations) {
