@@ -1,12 +1,12 @@
-const LineAPI = require('/api');
+const LineAPI = require('./api');
 const request = require('request');
 const fs = require('fs');
 const unirest = require('unirest');
 const webp = require('webp-converter');
 const path = require('path');
 const rp = require('request-promise');
-const config = require('/config');
-const { Message, OpType, Location } = require('./curve-thrift/line_types');
+const config = require('./config');
+const { Message, OpType, Location } = require('../curve-thrift/line_types');
 //let exec = require('child_process').exec;
 
 const myBot = ['u1d55aeaa8b863cb338f4e8fd7a761b4b','u99f8059e2924cfa7519e26691b3cbb78'];
@@ -54,16 +54,17 @@ class LINE extends LineAPI {
         this.receiverID = '';
         this.checkReader = [];
         this.stateStatus = {
-			autojoin: 1, //0 = No, 1 = Yes
-      cancel: 1, //0 = Auto cancel off, 1 = on
-      kick: 1, //1 = Yes, 0 = No
+			autojoin: 0, //0 = No, 1 = Yes
+            cancel: 0, //0 = Auto cancel off, 1 = on
+            kick: 1, //1 = Yes, 0 = No
 			mute: 0, //1 = Mute, 0 = Unmute
 			protect: 1, //Protect Qr,Kicker
 			qr: 0, //0 = Gk boleh, 1 = Boleh
-			salam: 0 //1 = Yes, 0 = No
+			salam: 1 //1 = Yes, 0 = No
         }
-		this.keyhelp = "
-		⍟Main Menu\n\
+		this.keyhelp = "\n\
+𝔑𝔬ℌ𝔢𝔞𝔡 ᴄᴏᴍᴍᴀɴᴅs\n\n\
+⍟Main Menu\n\
 		•absen\n\
 		•vykhodi\n\
 		•speed\n\
@@ -73,7 +74,7 @@ class LINE extends LineAPI {
 		•banlist\n\
 		•gURL\n\
 		•ginfo\n\
-		⍟Admin Menu\n\
+⍟Admin Menu\n\
 		•addcontact\n\
 		•adminutil\n\
 		•mute\n\
@@ -84,7 +85,8 @@ class LINE extends LineAPI {
 		•kickban\n\
 		•grouputil\n\
 		•opraken̶\n\
-		⍟Settings\n\";
+⍟Settings\n\
+\n\n 𝔑𝔬ℌ𝔢𝔞𝔡 ᴄ/ᴏ ʏᴏᴜɴɢ\n ᴅᴇꜰɪɴɪɴɢ ʏᴏᴜʀ ᴀʀᴇᴀ ᴀꜱ ᴛʜᴇ ʏᴏᴜɴɢᴀʀᴇᴀ ";
         var that = this;
     }
     getOprationType(operations) {
@@ -121,7 +123,7 @@ class LINE extends LineAPI {
 		if(operation.type == 16 && this.stateStatus.salam == 1){//join group
 			let halo = new Message();
 			halo.to = operation.param1;
-			halo.text = "Awkarin Lempar Bata\nWelkam Saya";
+			halo.text = "Welcome Saya";
 			this._client.sendMessage(0, halo);
 		}
 
@@ -129,7 +131,7 @@ class LINE extends LineAPI {
 		    let halobos = new Message();
 			halobos.to = operation.param1;
 			halobos.toType = 2;
-			halobos.text = "Awkarin Sama Tatan\nWelkam Kawand";
+			halobos.text = "Welcome Brodi";
 			this._client.sendMessage(0, halobos);
 		}else if(operation.type == 17 && this.stateStatus.salam == 1){//ada yang join
 			let seq = new Message();
@@ -155,7 +157,7 @@ class LINE extends LineAPI {
 		if(operation.type == 5 && this.stateStatus.salam == 1) {//someone adding me..
             let halo = new Message();
 			halo.to = operation.param1;
-			halo.text = "Creator: line.me/ti/p/~inisihyoung";
+			halo.text = "Creator: line.me/ti/p/thoHF71Zfj";
 			this._client.sendMessage(0, halo);
         }
 
@@ -174,7 +176,7 @@ class LINE extends LineAPI {
             }else if(!isAdminOrBot(operation.param3)){
 				this.textMessage("0106",kasihtau,operation.param3,1);
 				if(!isAdminOrBot(operation.param2)){
-					kasihtau.text = "Protect: ON, Bye bye bangsat...";
+					kasihtau.text = "Jangan main kick !";
 				    this._client.sendMessage(0, kasihtau);
 				}
 				if(this.stateStatus.protect == 1){
@@ -296,26 +298,6 @@ class LINE extends LineAPI {
 		return friend;
 	}
 
-        async checkIG() {
-        try {
-            let { userProfile, userName, bio, media, follow } = await this._searchInstagram(this.payload[0]);
-            await this._sendFileByUrl(this.messages,userProfile);
-            await this._sendMessage(this.messages, `${userName}\n\nBIO:\n${bio}\n\n\uDBC0 ${follow} \uDBC0`)
-            if(Array.isArray(media)) {
-                for (let i = 0; i < media.length; i++) {
-                    await this._sendFileByUrl(this.messages,media[i]);
-                }
-            } else {
-                this._sendMessage(this.messages,media);
-            }
-        } catch (error) {
-            this._sendMessage(this.messages,`Error: ${error}`);
-        }
-        return;
-    }
-}
-
-
 
 	async searchRoom(rid) {
         let thisroom = await this._getRoom(rid);
@@ -350,9 +332,9 @@ class LINE extends LineAPI {
 			for (var k in this.stateStatus){
                 if (typeof this.stateStatus[k] !== 'function') {
 					if(this.stateStatus[k]==1){
-						isinya += "『✔』"+firstToUpperCase(k)+" => 「ON」\n";
+						isinya += " "+firstToUpperCase(k)+" => on\n";
 					}else{
-						isinya += "『✖』"+firstToUpperCase(k)+" => 「OFF」\n";
+						isinya += " "+firstToUpperCase(k)+" => off\n";
 					}
                 }
             }
@@ -396,7 +378,7 @@ class LINE extends LineAPI {
 				if(seq.text == null || typeof seq.text === "undefined" || !seq.text){
 					let namanya = listMember[i].dn;
 				    let midnya = listMember[i].mid;
-				    seq.text += "@"+namanya+"";
+				    seq.text += "@"+namanya+" \n";
                     let member = [namanya];
 
                     let tmp = 0;
@@ -560,10 +542,10 @@ class LINE extends LineAPI {
 				let bang = new Message();
 				bang.to = seq.to;
 				if(vx[4] == "sudah"){
-					bang.text = "Sudah diadd bangsat, gabisa diadd lagi";
+					bang.text = "Dia sudah masuk friendlist, gk bisa saya add lagi";
 					this._client.sendMessage(0, bang);
 				}else{
-				    bang.text = "Sudah diadd ya brodi";
+				    bang.text = "Ok Brodi, Sudah ku add";
 				    await this._client.findAndAddContactsByMid(seq, midnya);
 				    this._client.sendMessage(0, bang);
 				}vx[4] = "";
@@ -581,10 +563,10 @@ class LINE extends LineAPI {
 				let bang = new Message();
 				bang.to = seq.to;
 				if(vx[4] == "sudah"){
-					bang.text = "Sudah diadd bangsat, gabisa diadd lagi";
+					bang.text = "Dia sudah masuk friendlist, gk bisa saya add lagi";
 					this._client.sendMessage(0, bang);
 				}else{
-				    bang.text = "Sudah diadd ya brodi";
+				    bang.text = "Ok Brodi, Sudah ku add";
 				    await this._client.findAndAddContactsByMid(seq, midnya);
 				    this._client.sendMessage(0, bang);
 				}vx[4] = "";
@@ -601,17 +583,17 @@ class LINE extends LineAPI {
 				let bang = new Message();
 				bang.to = seq.to;
 				if(vx[4] == "sudah"){
-					bang.text = "Sudah diadd bangsat, gabisa diadd lagi";
+					bang.text = "Dia sudah masuk friendlist, gk bisa saya add lagi";
 					this._client.sendMessage(0, bang);
 				}else{
-				    bang.text = "Sudah diadd ya brodi";
+				    bang.text = "Ok Brodi, Sudah ku add";
 				    await this._client.findAndAddContactsByMid(seq, midnya);
 				    this._client.sendMessage(0, bang);
 				}vx[4] = "";
 			}else{
 				let bang = new Message();
 				bang.to = seq.to;
-				bang.text = "# How to .addcontact\n-Kirim Contact Orang Yang Mau Di Add\n-Kirim Mid Orang Yang Mau Di Add\n-Atau Tag Orang Yang Mau Di Add";
+				bang.text = "# How to !addcontact\n-Kirim Contact Orang Yang Mau Di Add\n-Kirim Mid Orang Yang Mau Di Add\n-Atau Tag Orang Yang Mau Di Add";
 				this._client.sendMessage(0,bang);
 			}
 		}
@@ -688,8 +670,8 @@ class LINE extends LineAPI {
 					xvp = "\n#Video Profile: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"/"+vp;
 				}else{xvp='';}
 				let ress = timeline_post.result;
-				bang.text ="\n
-#Nama: "+orangnya[0].displayName+"\n\
+				bang.text =
+"\n#Nama: "+orangnya[0].displayName+"\n\
 \n#ID: \n"+orangnya[0].mid+"\n\
 \n#Profile Picture: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"\n\
 \n#Cover Picture: \nhttp://dl.profile.line-cdn.net/myhome/c/download.nhn?userid="+orangnya[0].mid+"&oid="+ress.homeInfo.objectId+"\n\
@@ -1527,17 +1509,17 @@ Link Download: "+idU.id+"\n";
 		}
 
         if(txt == 'opraken' && this.stateStatus.cancel == 1 && isAdminOrBot(seq.from_)) {
-        	let { listMember } = await this.searchGroup(seq.to);
+        	  let { listMember } = await this.searchGroup(seq.to);
             for (var i = 0; i < listMember.length; i++) {
                 if(!isAdminOrBot(listMember[i].mid)){
-                this.cancelAll(seq.to,[listMember[i].mid]);
-              }
+                  this.cancelAll(seq.to,[listMember[i].mid]);
+                }
             }
         }else if(txt == "opraken" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-        if(txt == 'absen') {
+        if(txt == 'halo') {
 			let { mid, displayName } = await this._client.getProfile();
-            this._sendMessage(seq, displayName+' Hadir');
+            this._sendMessage(seq, 'สวัสดี'+displayName);
         }
 
 		if(vx[1] == "grouputil" && seq.from_ == vx[0] && waitMsg == "yes"){
@@ -1669,10 +1651,11 @@ Link Download: "+idU.id+"\n";
             }
         }else if(txt === 'opraken' && !isAdminOrBot(seq.from_) && seq.toType == 2){this._sendMessage(seq,"Not permitted !");}
 
-		if(txt == 'help') {
+		if(txt == 'key') {
 			let botOwner = await this._client.getContacts([myBot[0]]);
             let { mid, displayName } = await this._client.getProfile();
-			seq.text = this.keyhelp;
+			let key2 = "";
+			seq.text = key2 += this.keyhelp;
 			this._client.sendMessage(0, seq);
 		}
 
@@ -1704,12 +1687,12 @@ Link Download: "+idU.id+"\n";
         }
 
 		if(txt == "tagall" && seq.toType == 2 && !isBanned(banList, seq.from_)){
-            let { listMember } = await this.searchGroup(seq.to);
-            for (var i = 0; i < listMember.length; i++) {
-                if(!isAdminOrBot(listMember[i].mid)){
+         let { listMember } = await this.searchGroup(seq.to);
+         for (var i = 0; i < listMember.length; i++) {
+              if(!isAdminOrBot(listMember[i].mid)){
                 this.tagAlls(seq.to,[listMember[i].mid]);
               }
-            }
+         }
 		}else if(txt == 'tagall' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
 		if(txt == '0103' && lockt == 1){
@@ -1868,15 +1851,15 @@ Link Download: "+idU.id+"\n";
 			let bang = new Message();
 			bang.to = seq.to;
 
-			bang.text = "Group Name:\n"+gname+"\n\
-\nGroup ID:\n"+gid+"\n\
-\nGroup Creator:\n"+gcreator+"\n\
-\nGroup CreatedTime:\n"+createdTime+"\n\
-\nGroup Ticket:\n"+ticketg+"\n\
-\nMember: "+memberCount+"\n\
-\nPending: "+pendingCount+"\n\
-\nQR: "+gqr+"\n\
-\nGroup Cover:\nhttp://dl.profile.line.naver.jp/"+gcover;
+			bang.text = "# Group Name:\n"+gname+"\n\
+\n# Group ID:\n"+gid+"\n\
+\n# Group Creator:\n"+gcreator+"\n\
+\n# Group CreatedTime:\n"+createdTime+"\n\
+\n# Group Ticket:\n"+ticketg+"\n\
+\n# Member: "+memberCount+"\n\
+\n# Pending: "+pendingCount+"\n\
+\n# QR: "+gqr+"\n\
+\n# Group Cover:\nhttp://dl.profile.line.naver.jp/"+gcover;
             this._client.sendMessage(0,bang);
         }else if(txt == 'ginfo' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
@@ -1911,7 +1894,7 @@ Link Download: "+idU.id+"\n";
             }
 			const groupUrl = await this._reissueGroupTicket(seq.to);
 			aas.toType = 0;
-			aas.text = `.masuk line://ti/g/${groupUrl}`;
+			aas.text = `!joinline://ti/g/${groupUrl}`;
 			this._client.sendMessage(0, aas);
 		}
 
@@ -1923,7 +1906,7 @@ Link Download: "+idU.id+"\n";
 			}else{this._client.inviteIntoGroup(0,seq.to,[param]);}
 		}
 
-		if(gTicket[0] == "masuk" && isAdminOrBot(seq.from_)){
+		if(gTicket[0] == "join" && isAdminOrBot(seq.from_)){
 			let sudah = "no";
 			let grp = await this._client.findGroupByTicket(gTicket[1]);
 			let lGroup = await this._client.getGroupIdsJoined();
@@ -1933,7 +1916,7 @@ Link Download: "+idU.id+"\n";
 				}
 			}
 			if(sudah == "ya"){
-				let bang = new Message();bang.to = seq.to;bang.text = "Sudah Join Guanya Bro";
+				let bang = new Message();bang.to = seq.to;bang.text = "Gagal join bang, eneng udah masuk groupnya";
 				this._client.sendMessage(0,bang);
 			}else if(sudah == "no"){
 				await this._acceptGroupInvitationByTicket(grp.id,gTicket[1]);
@@ -1946,7 +1929,7 @@ Link Download: "+idU.id+"\n";
             await this._acceptGroupInvitationByTicket(id,ticketId);
         }*/
 
-        if(cmd === 'ip') {
+        /*if(cmd === 'ip') {
             exec(`curl ipinfo.io/${payload}`,(err, res) => {
                 const result = JSON.parse(res);
                 if(typeof result.error == 'undefined') {
@@ -1975,7 +1958,7 @@ Link Download: "+idU.id+"\n";
                     this._sendMessage(seq,'Location Not Found , Maybe di dalem goa');
                 }
             })
-        }
+        }*/
     }
 
 }
