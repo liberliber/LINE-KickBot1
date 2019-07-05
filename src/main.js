@@ -62,29 +62,7 @@ class LINE extends LineAPI {
 			qr: 0, //0 = Gk boleh, 1 = Boleh
 			salam: 0 //1 = Yes, 0 = No
         }
-		this.keyhelp = "\n\
-⍟Main Menu\n\
-•absen\n\
-•vykhodi\n\
-•speed\n\
-•tagall\n\
-•kepo\n\
-•msg\n\
-•banlist\n\
-•gURL\n\
-•ginfo\n\
-⍟Admin Menu\n\
-•addcontact\n\
-•adminutil\n\
-•mute\n\
-•unmute\n\
-•refresh\n\
-•ban\n\
-•unban\n\
-•kickban\n\
-•grouputil\n\
-•opraken̶\n\
-⍟Settings\n\";
+		this.keyhelp = "⍟Main Menu\n\•absen\n\•vykhodi\n\•speed\n\•tagall\n\•kepo\n\•msg\n\•banlist\n\•gURL\n\•ginfo\n\⍟Admin Menu\n\•addcontact\n\•adminutil\n\•mute\n\•unmute\n\•refresh\n\•ban\n\•unban\n\•kickban\n\•grouputil\n\•opraken̶\n\⍟Settings\n\";
         var that = this;
     }
     getOprationType(operations) {
