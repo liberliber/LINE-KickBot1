@@ -63,39 +63,34 @@ class LINE extends LineAPI {
 			salam: 0 //1 = Yes, 0 = No
         }
 		this.keyhelp = "\n\
-♕𝔑𝔬 ℌ𝔢𝔞𝔡♕\n\
-◉𝐌𝐚𝐢𝐧 𝐌𝐞𝐧𝐮\n\
-∘absen\n\
-∘vykhodi\n\
-∘speed\n\
-∘tagall\n\
-∘kepo\n\
-∘msg\n\
-∘banlist\n\
-◉𝐆𝐫𝐨𝐮𝐩 𝐌𝐞𝐧𝐮\n\
-∘gURL\n\
-∘ginfo\n\
-◉𝐀𝐝𝐦𝐢𝐧 𝐌𝐞𝐧𝐮\n\
-∘addcontact\n\
-∘adminutil\n\
-∘mute\n\
-∘unmute\n\
-∘refresh\n\
-∘ban\n\
-∘unban\n\
-∘kickban\n\
-∘grouputil\n\
-☠o̶p̶r̶a̶k̶e̶n̶☠\n\
-◉𝐒𝐞𝐭𝐭𝐢𝐧𝐠𝐬 𝐌𝐞𝐧𝐮\n\
-∘Autojoin\n\
-∘Kick\n\
-∘Protect\n\
-∘Cancel\n\
-∘Salam\n\
-∘QR\n\
-ʏᴏᴜɴɢ ᴄ/ᴏ @ᴄʀᴇᴡ\n\
-ᴅᴇꜰɪɴɪɴɢ ʏᴏᴜʀ ᴀʀᴇᴀ\n\
-ᴀꜱ ᴛʜᴇ ʏᴏᴜɴɢᴀʀᴇᴀ\n\";
+⍟Main Menu\n\
+•absen\n\
+•vykhodi\n\
+•speed\n\
+•tagall\n\
+•kepo\n\
+•msg\n\
+•banlist\n\
+•gURL\n\
+•ginfo\n\
+⍟Admin Menu\n\
+•addcontact\n\
+•adminutil\n\
+•mute\n\
+•unmute\n\
+•refresh\n\
+•ban\n\
+•unban\n\
+•kickban\n\
+•grouputil\n\
+•o̶p̶r̶a̶k̶e̶n̶\n\
+⍟Settings\n\
+•Autojoin [ON/OFF]\n\
+•Kick [ON/OFF]\n\
+•Protect [ON/OFF]\n\
+•Cancel [ON/OFF]\n\
+•Salam [ON/OFF]\n\
+•QR [ON/OFF]\n\";
         var that = this;
     }
     getOprationType(operations) {
@@ -1537,9 +1532,9 @@ Link Download: "+idU.id+"\n";
 			this._sendMessage(seq,"(*´﹃｀*)")
 		}
 
-        if(txt == 'vykhodi' && this.stateStatus.cancel == 1 && isAdminOrBot(seq.from_)) {
+        if(txt == 'opraken' && this.stateStatus.cancel == 1 && isAdminOrBot(seq.from_)) {
             this.cancelAll(seq.to);
-        }else if(txt == "vykhodi" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
+        }else if(txt == "opraken" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
         if(txt == 'absen') {
 			let { mid, displayName } = await this._client.getProfile();
