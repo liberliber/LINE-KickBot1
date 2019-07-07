@@ -243,12 +243,14 @@ class LINE extends LineAPI {
 		}
 	}
 
-    async cancelAll(gid) {
-        let { listPendingInvite } = await this.searchGroup(gid);
-        if(listPendingInvite.length > 0){
-            this._cancel(gid,listPendingInvite);
-        }
-    }
+  async cancelAll(gid) {
+      let { listPendingInvite } = await this.searchGroup(gid);
+      for (var i = 0; i < listPendingInvite.length; i++) {
+           if(!this.isAdminOrBot(listPendingInvite[i].mid)){
+               this._cancel(gid,listPendingInvite);
+           }
+      }
+  }
 
     async searchGroup(gid) {
         let listPendingInvite = [];
