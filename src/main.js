@@ -63,36 +63,46 @@ class LINE extends LineAPI {
 			salam: 1 //1 = Yes, 0 = No
         }
 		this.keyhelp = "\n\
-𝔑𝔬ℌ𝔢𝔞𝔡 ᴄᴏᴍᴍᴀɴᴅs\n\n\
-⍟Main Menu\n\
-		•absen\n\
-		•bubar\n\
-		•vykhodi\n\
-		•speed\n\
-		•tagall\n\
-		•kepo\n\
-		•myid\n\
-	  •cekid\n\
-		•banlist\n\
-		•Apakah\n\
-		•gURL\n\
-		•ginfo\n\
-⍟Admin Menu\n\
-		•adminutil\n\
-		•mute\n\
-		•unmute\n\
-		•refresh\n\
-		•ban\n\
-		•unban\n\
-		•kickban\n\
-		•grouputil\n\
-		•ᴏ̶ᴘ̶ʀ̶ᴀ̶ᴋ̶ᴇ̶ɴ̶̶\n\
-⍟Settings
-\n\n\ 𝔑𝔬ℌ𝔢𝔞𝔡 ᴄ/ᴏ ʏᴏᴜɴɢ\n\
-ᴅᴇꜰɪɴɪɴɢ ʏᴏᴜʀ ᴀʀᴇᴀ\n\
-ᴀꜱ ᴛʜᴇ ʏᴏᴜɴɢᴀʀᴇᴀ\n\";
+ʏᴏᴜɴɢ ᴄᴏᴍᴍᴀɴᴅs\n\n\
+addcontact *ADMIN*\n\
+adminutil *ADMIN*\n\
+animesearch\n\
+ban *ADMIN*\n\
+banlist\n\
+botcontact\n\
+botleft *ADMIN*\n\
+broadcast *ADMIN*\n\
+cancel\n\
+cekid\n\
+curl\n\
+getimage\n\
+ginfo\n\
+grouputil *ADMIN*\n\
+gURL\n\
+halo\n\
+kepo\n\
+key\n\
+kickban *ADMIN*\n\
+kickall *ADMIN*\n\
+kickme\n\
+msg\n\
+mute *ADMIN*\n\
+myid\n\
+refresh *ADMIN*\n\
+sendcontact\n\
+setting\n\
+sms\n\
+speed\n\
+tagall\n\
+tts\n\
+unmute *ADMIN*\n\
+unban *ADMIN*\n\
+whattime\n\
+yousound\n\
+youtube\n\
+\n\n ʏᴏᴜɴɢ ᴄ/ᴏ  @ᴄʀᴇᴡ\n ᴅᴇꜰɪɴɪɴɢ ᴛʜᴇ ʏᴏᴜʀ ᴀʀᴇᴀ ᴀꜱ ᴛʜᴇ ʏᴏᴜɴɢᴀʀᴇᴀ ";
         var that = this;
-    }
+        
     getOprationType(operations) {
         for (let key in OpType) {
             if(operations.type == OpType[key]) {
