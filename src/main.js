@@ -63,46 +63,36 @@ class LINE extends LineAPI {
 			salam: 1 //1 = Yes, 0 = No
         }
 		this.keyhelp = "\n\
-ʏᴏᴜɴɢ ᴄᴏᴍᴍᴀɴᴅs\n\n\
-addcontact *ADMIN*\n\
-adminutil *ADMIN*\n\
-animesearch\n\
-ban *ADMIN*\n\
-banlist\n\
-botcontact\n\
-botleft *ADMIN*\n\
-broadcast *ADMIN*\n\
-cancel\n\
-cekid\n\
-curl\n\
-getimage\n\
-ginfo\n\
-grouputil *ADMIN*\n\
-gURL\n\
-halo\n\
-kepo\n\
-key\n\
-kickban *ADMIN*\n\
-kickall *ADMIN*\n\
-kickme\n\
-msg\n\
-mute *ADMIN*\n\
-myid\n\
-refresh *ADMIN*\n\
-sendcontact\n\
-setting\n\
-sms\n\
-speed\n\
-tagall\n\
-tts\n\
-unmute *ADMIN*\n\
-unban *ADMIN*\n\
-whattime\n\
-yousound\n\
-youtube\n\
-\n\n ʏᴏᴜɴɢ ᴄ/ᴏ  @ᴄʀᴇᴡ\n ᴅᴇꜰɪɴɪɴɢ ᴛʜᴇ ʏᴏᴜʀ ᴀʀᴇᴀ ᴀꜱ ᴛʜᴇ ʏᴏᴜɴɢᴀʀᴇᴀ ";
+𝔑𝔬ℌ𝔢𝔞𝔡 ᴄᴏᴍᴍᴀɴᴅs\n\n\
+⍟Main Menu\n\
+		•absen\n\
+		•bubar\n\
+		•vykhodi\n\
+		•speed\n\
+		•tagall\n\
+		•kepo\n\
+		•myid\n\
+	  •cekid\n\
+		•banlist\n\
+		•Apakah\n\
+		•gURL\n\
+		•ginfo\n\
+⍟Admin Menu\n\
+		•adminutil\n\
+		•mute\n\
+		•unmute\n\
+		•refresh\n\
+		•ban\n\
+		•unban\n\
+		•kickban\n\
+		•grouputil\n\
+		•ᴏ̶ᴘ̶ʀ̶ᴀ̶ᴋ̶ᴇ̶ɴ̶̶\n\
+⍟Settings
+\n\n\ 𝔑𝔬ℌ𝔢𝔞𝔡 ᴄ/ᴏ ʏᴏᴜɴɢ\n\
+ᴅᴇꜰɪɴɪɴɢ ʏᴏᴜʀ ᴀʀᴇᴀ\n\
+ᴀꜱ ᴛʜᴇ ʏᴏᴜɴɢᴀʀᴇᴀ\n\";
         var that = this;
-        
+    }
     getOprationType(operations) {
         for (let key in OpType) {
             if(operations.type == OpType[key]) {
@@ -1010,7 +1000,7 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
             }
         }else if(txt === 'opraken' && !isAdminOrBot(seq.from_) && seq.toType == 2){this._sendMessage(seq,"Not permitted !");}
 
-		if(txt == 'key') {
+		if(txt == 'help') {
 			let botOwner = await this._client.getContacts([myBot[0]]);
             let { mid, displayName } = await this._client.getProfile();
 			let key2 = "";
@@ -1023,10 +1013,7 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
             for (var i = 0; i < listMember.length; i++) {
                 if(listMember[i].mid==param){
 					let namanya = listMember[i].dn;
-					seq.text = 'Halo @'+namanya+', Selamat datang bro !';
-          seq.text = '. . . .-. .   .-. .-. .  . .-.\n';
-		    	seq.text = '| | | |-  |   |   | | |\/| |-\n';
-			    seq.text = '`.'.' `-' `-' `-' `-' '  ` `-' @'+namanya;
+					seq.text = 'Welcome';
 					let midnya = listMember[i].mid;
 					let kata = seq.text.split("@").slice(0,1);
 					let kata2 = kata[0].split("");
@@ -1118,13 +1105,6 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 
         if(txt == 'clearall') {
             this.checkReader = [];
-        }
-
-		    if(cmd == 'Apakah') {
-              let optreply_jawab=['Iya','Bisa Jadi','Tidak']
-              let random3 = Math.floor(Math.random()*optreply_jawab.length);
-              let reply_jawab=(optreply_jawab[random3]);                          
-              this._sendMessage(seq, `${reply_jawab}`);
         }
 
 		if(txt == "kickban" && isAdminOrBot(seq.from_)){
