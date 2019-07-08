@@ -127,12 +127,7 @@ class LINE extends LineAPI {
 		if(operation.type == 16 && this.stateStatus.salam == 1){//join group
 			let halo = new Message();
 			halo.to = operation.param1;
-			halo.text = "███╗   ██╗ ██████╗     ██╗  ██╗███████╗ █████╗ ██████╗\n";
-			halo.text = "████╗  ██║██╔═══██╗    ██║  ██║██╔════╝██╔══██╗██╔══██╗\n";
-			halo.text = "██╔██╗ ██║██║   ██║    ███████║█████╗  ███████║██║  ██║\n";
-			halo.text = "██║╚██╗██║██║   ██║    ██╔══██║██╔══╝  ██╔══██║██║  ██║\n";
-			halo.text = "██║ ╚████║╚██████╔╝    ██║  ██║███████╗██║  ██║██████╔╝\n";
-			halo.text = "╚═╝  ╚═══╝ ╚═════╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ᴄ/ᴏ ʏᴏᴜɴɢ";
+			halo.text = "Welcome Saya\n";
 			this._client.sendMessage(0, halo);
 		}
 
@@ -140,9 +135,7 @@ class LINE extends LineAPI {
 		    let halobos = new Message();
 			halobos.to = operation.param1;
 			halobos.toType = 2;
-			halobos.text = ". . . .-. .   .-. .-. .  . .-.\n";
-			halobos.text = "| | | |-  |   |   | | |\/| |-\n";
-			halobos.text = "`.'.' `-' `-' `-' `-' '  ` `-'\n";
+			halobos.text = "Welcome Bro\n";
 			this._client.sendMessage(0, halobos);
 		}else if(operation.type == 17 && this.stateStatus.salam == 1){//ada yang join
 			let seq = new Message();
@@ -156,9 +149,7 @@ class LINE extends LineAPI {
 		    let babay = new Message();
 			babay.to = operation.param1;
 			babay.toType = 2;
-			babay.text = "        _     ___ ___      __  ___  _   _  ___\n";
-			babay.text = " _/_/_ / ) / / )   )  )\ ) )_) )_  /_) / ` )_\n";
-			babay.text = "-/-/- (_/ (_/ (  _(_ (  ( /   (__ / / (_. (__\n";
+			babay.text = "#outinpeace\n";
 			this._invite(operation.param1,[operation.param2]);
 			this._client.sendMessage(0, babay);
 		}else if(operation.type == 15 && !isAdminOrBot(operation.param2)){
@@ -172,7 +163,7 @@ class LINE extends LineAPI {
 			halo.to = operation.param1;
 			halo.text = "Thanks For Adding Me :)";
 			this._client.sendMessage(0, halo);
-    }
+        }
 
         if(operation.type == 19 && !isAdminOrBot(operation.param2)) { //ada kick
             // op1 = group nya
@@ -189,7 +180,7 @@ class LINE extends LineAPI {
             }else if(!isAdminOrBot(operation.param3)){
 				this.textMessage("0106",kasihtau,operation.param3,1);
 				if(!isAdminOrBot(operation.param2)){
-					kasihtau.text = "Jangan main kick !";
+					kasihtau.text = "『TERCYDUCK』 ketahuan ya kamu jancok";
 				    this._client.sendMessage(0, kasihtau);
 				}
 				if(this.stateStatus.protect == 1){
@@ -256,12 +247,14 @@ class LINE extends LineAPI {
 		}
 	}
 
-    async cancelAll(gid) {
-        let { listPendingInvite } = await this.searchGroup(gid);
-        if(listPendingInvite.length > 0){
-            this._cancel(gid,listPendingInvite);
-        }
-    }
+  async cancelAll(gid) {
+      let { listPendingInvite } = await this.searchGroup(gid);
+      for (var i = 0; i < listPendingInvite.length; i++) {
+           if(!this.isAdminOrBot(listPendingInvite[i].mid)){
+               this._cancel(gid,listPendingInvite);
+           }
+      }
+  }
 
     async searchGroup(gid) {
         let listPendingInvite = [];
@@ -329,9 +322,9 @@ class LINE extends LineAPI {
 			for (var k in this.stateStatus){
                 if (typeof this.stateStatus[k] !== 'function') {
 					if(this.stateStatus[k]==1){
-						isinya += " "+firstToUpperCase(k)+" => on\n";
+						isinya += " "+firstToUpperCase(k)+" ➞ 𝙊𝙉\n";
 					}else{
-						isinya += " "+firstToUpperCase(k)+" => off\n";
+						isinya += " "+firstToUpperCase(k)+" ➞ 𝙊𝙁𝙁\n";
 					}
                 }
             }this._sendMessage(seq,isinya);
@@ -345,9 +338,9 @@ class LINE extends LineAPI {
 			for (var k in this.stateStatus){
                 if (typeof this.stateStatus[k] !== 'function') {
 					if(this.stateStatus[k]==1){
-						isinya += " "+firstToUpperCase(k)+" => on\n";
+						isinya += " "+firstToUpperCase(k)+" ➞ 𝙊𝙉\n";
 					}else{
-						isinya += " "+firstToUpperCase(k)+" => off\n";
+						isinya += " "+firstToUpperCase(k)+" ➞ 𝙊𝙁𝙁\n";
 					}
                 }
             }
@@ -391,7 +384,7 @@ class LINE extends LineAPI {
 				if(seq.text == null || typeof seq.text === "undefined" || !seq.text){
 					let namanya = listMember[i].dn;
 				    let midnya = listMember[i].mid;
-				    seq.text += "@"+namanya+" \n";
+				    seq.text += "@"+namanya+" ";
                     let member = [namanya];
 
                     let tmp = 0;
@@ -500,132 +493,11 @@ class LINE extends LineAPI {
 		const com = txt.split(':');
 		const cox = txt.split(' ');
 
-		if(vx[1] == "!sendcontact" && seq.from_ == vx[0] && waitMsg == "yes"){
+		if(vx[1] == "cekid" && seq.from_ == vx[0] && waitMsg == "yes"){
 			let panjang = txt.split("");
 			if(txt == "cancel"){
 				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"# CANCELLED");
-			}else if(txt == "me"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				seq.text = "Me";seq.contentType = 13;
-				seq.contentMetadata = { mid: seq.from_ };
-				this._client.sendMessage(0, seq);
-			}else if(cot[1]){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				let ment = seq.contentMetadata.MENTION;
-			    let xment = JSON.parse(ment);let pment = xment.MENTIONEES[0].M;
-				seq.text = "Me";seq.contentType = 13;
-				seq.contentMetadata = { mid: pment };
-				this._client.sendMessage(0, seq);
-			}else if(vx[2] == "arg1" && panjang.length > 30 && panjang[0] == "u"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				seq.text = "Me";seq.contentType = 13;
-				seq.contentMetadata = { mid: txt };
-				this._client.sendMessage(0, seq);
-			}else{
-				this._sendMessage(seq,"Coba tag orangnya atau kirim midnya Brodi");
-			}
-		}
-		if(txt == "!sendcontact" && !isBanned(banList, seq.from_)){
-			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
-			    waitMsg = "yes";
-			    vx[0] = seq.from_;vx[1] = txt;vx[2] = "arg1";
-			    this._sendMessage(seq,"Kontaknya siapa bang ? Coba tag orangnya atau kirim midnya");
-			}else{
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
 				this._sendMessage(seq,"#CANCELLED");
-			}
-		}else if(txt == '!sendcontact' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
-
-		if(vx[1] == "!addcontact" && seq.from_ == vx[0] && waitMsg == "yes"){
-			let panjang = txt.split("");
-			if(txt == "cancel"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"# CANCELLED");
-			}else if(seq.contentType == 13){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				let midnya = seq.contentMetadata.mid;
-				let listContacts = await this._client.getAllContactIds();
-				for(var i = 0; i < listContacts.length; i++){
-					if(listContacts[i] == midnya){
-						vx[4] = "sudah";
-						break;
-					}
-				}
-				let bang = new Message();
-				bang.to = seq.to;
-				if(vx[4] == "sudah"){
-					bang.text = "Dia sudah masuk friendlist, gk bisa saya add lagi";
-					this._client.sendMessage(0, bang);
-				}else{
-				    bang.text = "Ok Brodi, Sudah ku add";
-				    await this._client.findAndAddContactsByMid(seq, midnya);
-				    this._client.sendMessage(0, bang);
-				}vx[4] = "";
-			}else if(cot[1]){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				let ment = seq.contentMetadata.MENTION;
-			    let xment = JSON.parse(ment);let pment = xment.MENTIONEES[0].M;let midnya = pment;
-				let listContacts = await this._client.getAllContactIds();
-				for(var i = 0; i < listContacts.length; i++){
-					if(listContacts[i] == midnya){
-						vx[4] = "sudah";
-						break;
-					}
-				}
-				let bang = new Message();
-				bang.to = seq.to;
-				if(vx[4] == "sudah"){
-					bang.text = "Dia sudah masuk friendlist, gk bisa saya add lagi";
-					this._client.sendMessage(0, bang);
-				}else{
-				    bang.text = "Ok Brodi, Sudah ku add";
-				    await this._client.findAndAddContactsByMid(seq, midnya);
-				    this._client.sendMessage(0, bang);
-				}vx[4] = "";
-			}else if(vx[2] == "arg1" && panjang.length > 30 && panjang[0] == "u"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				let midnya = txt;
-				let listContacts = await this._client.getAllContactIds();
-				for(var i = 0; i < listContacts.length; i++){
-					if(listContacts[i] == midnya){
-						vx[4] = "sudah";
-						break;
-					}
-				}
-				let bang = new Message();
-				bang.to = seq.to;
-				if(vx[4] == "sudah"){
-					bang.text = "Dia sudah masuk friendlist, gk bisa saya add lagi";
-					this._client.sendMessage(0, bang);
-				}else{
-				    bang.text = "Ok Brodi, Sudah ku add";
-				    await this._client.findAndAddContactsByMid(seq, midnya);
-				    this._client.sendMessage(0, bang);
-				}vx[4] = "";
-			}else{
-				let bang = new Message();
-				bang.to = seq.to;
-				bang.text = "# How to !addcontact\n-Kirim Contact Orang Yang Mau Di Add\n-Kirim Mid Orang Yang Mau Di Add\n-Atau Tag Orang Yang Mau Di Add";
-				this._client.sendMessage(0,bang);
-			}
-		}
-		if(txt == "!addcontact" && isAdminOrBot(seq.from_)){
-			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
-			    waitMsg = "yes";
-			    vx[0] = seq.from_;vx[1] = txt;vx[2] = "arg1";
-			    this._sendMessage(seq,"Kontaknya siapa bang ? #Tag orangnya atau kirim kontaknya");
-			}else{
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}
-		}else if(txt == '!addcontact' && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
-
-		if(vx[1] == "!cekid" && seq.from_ == vx[0] && waitMsg == "yes"){
-			let panjang = txt.split("");
-			if(txt == "cancel"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"# CANCELLED");
 			}else if(seq.contentType == 13){
 				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				let midnya = seq.contentMetadata.mid;
@@ -649,27 +521,26 @@ class LINE extends LineAPI {
 			}else{
 				let bang = new Message();
 				bang.to = seq.to;
-				bang.text = "# How to !cekid\nTag orangnya / kirim kontak yang mau di-cek idnya !";
+				bang.text = "Ketik cekid lalu tag orangnya :)";
 				this._client.sendMessage(0,bang);
 			}
 		}
-		if(txt == "!cekid" && !isBanned(banList, seq.from_)){
+		if(txt == "cekid" && !isBanned(banList, seq.from_)){
 			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
 			    waitMsg = "yes";
 			    vx[0] = seq.from_;vx[1] = txt;vx[2] = "arg1";
-			    this._sendMessage(seq,"Cek ID siapa bang ? #Kirim kontaknya");
-				this._sendMessage(seq,"Atau bisa juga @tag orangnya");
+				this._sendMessage(seq,"Silahkan Tag Orangnya");
 			}else{
 				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
 				this._sendMessage(seq,"#CANCELLED");
 			}
-		}else if(txt == '!cekid' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
+		}else if(txt == 'cekid' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-		if(vx[1] == "!kepo" && seq.from_ == vx[0] && waitMsg == "yes"){
+		if(vx[1] == "kepo" && seq.from_ == vx[0] && waitMsg == "yes"){
 			let panjang = txt.split("");
 			if(txt == "cancel"){
 				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"# CANCELLED");
+				this._sendMessage(seq,"#CANCELLED");
 			}else if(seq.contentType == 13){
 				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				let midnya = seq.contentMetadata.mid;
@@ -680,20 +551,16 @@ class LINE extends LineAPI {
 				let orangnya = await this._getContacts([midnya]);let vp,xvp;
 				if(orangnya[0].videoProfile !== null && orangnya[0].videoProfile !== undefined){
 					vp = orangnya[0].videoProfile.tids.mp4;
-					xvp = "\n#Video Profile: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"/"+vp;
+					xvp = "\nVideo Profile: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"/"+vp;
 				}else{xvp='';}
 				let ress = timeline_post.result;
 				bang.text =
-"\n#Nama: "+orangnya[0].displayName+"\n\
-\n#ID: \n"+orangnya[0].mid+"\n\
-\n#Profile Picture: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"\n\
-\n#Cover Picture: \nhttp://dl.profile.line-cdn.net/myhome/c/download.nhn?userid="+orangnya[0].mid+"&oid="+ress.homeInfo.objectId+"\n\
+"\nNama: "+orangnya[0].displayName+"\n\
+\nID: \n"+orangnya[0].mid+"\n\
+\nProfile Picture: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"\n\
+\nCover Picture: \nhttp://dl.profile.line-cdn.net/myhome/c/download.nhn?userid="+orangnya[0].mid+"&oid="+ress.homeInfo.objectId+"\n\
 "+xvp+"\n\
-\n#Status: \n"+orangnya[0].statusMessage+"\n\
-\n\n\n \n\
-====================\n\
-ʏᴏᴜɴɢ ᴄ/ᴏ  @ᴄʀᴇᴡ\n ᴅᴇꜰɪɴɪɴɢ ᴛʜᴇ ʏᴏᴜʀ ᴀʀᴇᴀ ᴀꜱ ᴛʜᴇ ʏᴏᴜɴɢᴀʀᴇᴀ \n\
-====================";
+\nStatus: \n"+orangnya[0].statusMessage+"";
 				this._client.sendMessage(0,bang);
 			}else if(cot[1]){
 				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
@@ -706,124 +573,53 @@ class LINE extends LineAPI {
 				let orangnya = await this._getContacts([pment]);let vp,xvp;
 				if(orangnya[0].videoProfile !== null && orangnya[0].videoProfile !== undefined){
 					vp = orangnya[0].videoProfile.tids.mp4;
-					xvp = "\n#Video Profile: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"/"+vp;
+					xvp = "\nVideo Profile: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"/"+vp;
 				}else{xvp='';}
 				let ress = timeline_post.result;
 				bang.text =
-"\n#Nama: "+orangnya[0].displayName+"\n\
-\n#ID: \n"+orangnya[0].mid+"\n\
-\n#Profile Picture: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"\n\
-\n#Cover Picture: \nhttp://dl.profile.line-cdn.net/myhome/c/download.nhn?userid="+orangnya[0].mid+"&oid="+ress.homeInfo.objectId+"\n\
+"\nNama: "+orangnya[0].displayName+"\n\
+\nID: \n"+orangnya[0].mid+"\n\
+\nProfile Picture: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"\n\
+\nCover Picture: \nhttp://dl.profile.line-cdn.net/myhome/c/download.nhn?userid="+orangnya[0].mid+"&oid="+ress.homeInfo.objectId+"\n\
 "+xvp+"\n\
-\n#Status: \n"+orangnya[0].statusMessage+"\n\
-\n\n\n \n\
-====================\n\
-ʏᴏᴜɴɢ ᴄ/ᴏ  @ᴄʀᴇᴡ\n ᴅᴇꜰɪɴɪɴɢ ᴛʜᴇ ʏᴏᴜʀ ᴀʀᴇᴀ ᴀꜱ ᴛʜᴇ ʏᴏᴜɴɢᴀʀᴇᴀ \n\
-====================";
+\nStatus: \n"+orangnya[0].statusMessage+"";
 				this._client.sendMessage(0,bang);
 			}else if(vx[2] == "arg1" && panjang.length > 30 && panjang[0] == "u"){
 				let timeline_post = await this._getHome(txt,this.config.chanToken);
 				let orangnya = await this._getContacts([txt]);let vp,xvp;
 				if(orangnya[0].videoProfile !== null && orangnya[0].videoProfile !== undefined){
 					vp = orangnya[0].videoProfile.tids.mp4;
-					xvp = "\n#Video Profile: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"/"+vp;
+					xvp = "\nVideo Profile: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"/"+vp;
 				}else{xvp='';}
 				let ress = timeline_post.result;
 				seq.text =
-"\n#Nama: "+orangnya[0].displayName+"\n\
-\n#ID: \n"+orangnya[0].mid+"\n\
-\n#Profile Picture: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"\n\
-\n#Cover Picture: \nhttp://dl.profile.line-cdn.net/myhome/c/download.nhn?userid="+orangnya[0].mid+"&oid="+ress.homeInfo.objectId+"\n\
+"\nNama: "+orangnya[0].displayName+"\n\
+\nID: \n"+orangnya[0].mid+"\n\
+\nProfile Picture: \nhttp://dl.profile.line.naver.jp"+orangnya[0].picturePath+"\n\
+\nCover Picture: \nhttp://dl.profile.line-cdn.net/myhome/c/download.nhn?userid="+orangnya[0].mid+"&oid="+ress.homeInfo.objectId+"\n\
 "+xvp+"\n\
-\n#Status: \n"+orangnya[0].statusMessage+"\n\
-\n\n\n \n\
-====================\n\
-ʏᴏᴜɴɢ ᴄ/ᴏ  @ᴄʀᴇᴡ\n ᴅᴇꜰɪɴɪɴɢ ᴛʜᴇ ʏᴏᴜʀ ᴀʀᴇᴀ ᴀꜱ ᴛʜᴇ ʏᴏᴜɴɢᴀʀᴇᴀ\n\
-====================";
+\nStatus: \n"+orangnya[0].statusMessage+"";
 vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				this._sendMessage(seq,seq.text);
 			}else{
 				let bang = new Message();
 				bang.to = seq.to;
-				bang.text = "# How to !kepo\nTag orangnya / kirim kontak / kirim mid yang mau dikepoin !";
+				bang.text = "Ketik kepo lalu tag orangnya";
 				this._client.sendMessage(0,bang);
 			}
 		}
-		if(txt == "!kepo" && !isBanned(banList, seq.from_)){
+		if(txt == "kepo" && !isBanned(banList, seq.from_)){
 			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
 			    waitMsg = "yes";
 			    vx[0] = seq.from_;vx[1] = txt;vx[2] = "arg1";
-			    this._sendMessage(seq,"Kepo sama siapa bang ? #kirim midnya");
+			    this._sendMessage(seq,"Silahkan tag orangnya");
 			}else{
 				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
 				this._sendMessage(seq,"#CANCELLED");
 			}
-		}else if(txt == '!kepo' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
+		}else if(txt == 'kepo' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-		if(vx[1] == "!msg" && seq.from_ == vx[0] && waitMsg == "yes"){
-			//vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-			let panjang = txt.split("");
-			if(txt == "cancel"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}else if(vx[2] == "arg1" && vx[3] == "mid" && cot[1]){
-				let bang = new Message();bang.to = seq.to;
-				bang.text = "OK !, btw pesan-nya apa ?"
-				this._client.sendMessage(0,bang);
-				let ment = seq.contentMetadata.MENTION;
-			    let xment = JSON.parse(ment);let pment = xment.MENTIONEES[0].M;
-				let midnya = JSON.stringify(pment);
-				vx[4] = midnya;
-				vx[2] = "arg2";
-			}else if(vx[2] == "arg1" && vx[3] == "mid" && seq.contentType == 13){
-				let midnya = seq.contentMetadata.mid;let bang = new Message();bang.to = seq.to;
-				bang.text = "OK !, btw pesan-nya apa ?"
-				this._client.sendMessage(0,bang);
-				vx[4] = midnya;
-				vx[2] = "arg2";
-			}else if(vx[2] == "arg1" && vx[3] == "mid" && panjang.length > 30){
-				this._sendMessage(seq,"OK !, btw pesan-nya apa ?");
-				vx[4] = txt;
-				vx[2] = "arg2";
-			}else if(vx[2] == "arg2" && vx[3] == "mid"){
-				let panjangs = vx[4].split("");
-				let kirim = new Message();let bang = new Message();
-				bang.to = seq.to;
-				if(panjangs[0] == "u"){
-					kirim.toType = 0;
-				}else if(panjangs[0] == "c"){
-					kirim.toType = 2;
-				}else if(panjangs[0] == "r"){
-					kirim.toType = 1;
-				}else{
-					kirim.toType = 0;
-				}
-				bang.text = "Terkirim bang !";
-				kirim.to = vx[4];
-				kirim.text = txt;
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";vx[4] = "";
-				this._client.sendMessage(0, kirim);
-				this._client.sendMessage(0, bang);
-			}else{
-				let bang = new Message();
-				bang.to = seq.to;
-				bang.text = "# How to !msg\nTag / Kirim Kontak / Kirim Mid orang yang mau dikirimkan pesan !";
-				this._client.sendMessage(0,bang);
-			}
-		}if(txt == "!msg" && !isBanned(banList, seq.from_)){
-			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
-			    waitMsg = "yes";
-			    vx[0] = seq.from_;vx[1] = txt;vx[3] = "mid";
-			    this._sendMessage(seq,"Mau kirim pesan ke siapa bang ?");
-				this._sendMessage(seq,"Tag / Kirim Kontak / Kirim Mid orang yang mau dikirimkan pesan !");
-				vx[2] = "arg1";
-			}else{
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}
-		}else if(txt == '!msg' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
-
-		if(vx[1] == "!ban" && seq.from_ == vx[0] && waitMsg == "yes"){
+		if(vx[1] == "ban" && seq.from_ == vx[0] && waitMsg == "yes"){
 			let panjang = txt.split("");
 			if(txt == "cancel"){
 				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
@@ -834,10 +630,10 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				let msg = new Message();msg.to = seq.to;
 				if(isBanned(banList,pment)){
 					waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-					msg.text = cot[1]+" sudah masuk daftar banlist...";
+					msg.text = cot[1]+" 「𝙁𝘼𝙄𝙇𝙀𝘿」 Target Telah Masuk Daftar Banlist";
 					this._client.sendMessage(0,msg);
 				}else{
-					msg.text = "Sudah bosku !";
+					msg.text = "「𝙎𝙐𝘾𝘾𝙀𝙎𝙎」 Berhasil Menambahkan Kedaftar Banlist";
 					this._client.sendMessage(0, msg);
 			        banList.push(pment);
 					waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
@@ -846,10 +642,10 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				let midnya = seq.contentMetadata.mid;let msg = new Message();msg.to = seq.to;
 				if(isBanned(banList,midnya)){
 					waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-					msg.text = "Dia sudah masuk daftar banlist...";
+					msg.text = "「𝙁𝘼𝙄𝙇𝙀𝘿」 Target Telah Masuk Daftar Banlist";
 					this._client.sendMessage(0, msg);
 				}else{
-					msg.text = "Sudah bosku !";
+					msg.text = "「𝙎𝙐𝘾𝘾𝙀𝙎𝙎」 Berhasil Menambahkan Kedaftar Banlist";
 					this._client.sendMessage(0, msg);
 			        banList.push(midnya);
 					waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
@@ -857,31 +653,31 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 			}else if(panjang.length > 30 && panjang[0] == "u"){
 				if(isBanned(banList,txt)){
 					waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-					this._sendMessage(seq,"Dia sudah masuk daftar banlist...");
+					this._sendMessage(seq,"「𝙁𝘼𝙄𝙇𝙀𝘿」 Target Telah Masuk Daftar Banlist");
 				}else{
-					let msg = new Message();msg.to = seq.to;msg.text = "Sudah bosku !";
+					let msg = new Message();msg.to = seq.to;msg.text = "「𝙎𝙐𝘾𝘾𝙀𝙎𝙎」 Berhasil Menambahkan Kedaftar Banlist";
 					this._client.sendMessage(0, msg);
 			        banList.push(txt);
 					waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
 				}
 			}else{
-					this._sendMessage(seq,"# How to !ban\nKirim kontaknya / mid / tag orangnya yang mau diban sama abang !");
+					this._sendMessage(seq,"Ketika ban lalu tag orangnya");
 			}
 		}
-		if(txt == "!ban" && isAdminOrBot(seq.from_)){
+		if(txt == "ban" && isAdminOrBot(seq.from_)){
 			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
 			    waitMsg = "yes";
 			    vx[0] = seq.from_;vx[1] = txt;
 			    this._sendMessage(seq,"Ban siapa ?");
 				vx[2] = "arg1";
-				this._sendMessage(seq,"# Kirim kontaknya / mid / tag orangnya");
+				this._sendMessage(seq,"Silahkan tag orangnya");
 			}else{
 				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
 				this._sendMessage(seq,"#CANCELLED");
 			}
-		}else if(txt == "!ban" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
+		}else if(txt == "ban" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-		if(vx[1] == "!adminutil" && seq.from_ == vx[0] && waitMsg == "yes"){
+		if(vx[1] == "adminutil" && seq.from_ == vx[0] && waitMsg == "yes"){
 			let panjang = txt.split("");
 			let M = new Message();M.to = seq.to;
 			let xtxt = "";
@@ -892,7 +688,7 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				switch(txt){
 					case 'add':
 					    vx[2] = "arg2";vx[3] = txt;
-					    this._sendMessage(seq,"# Kirim kontaknya / mid / tag orangnya yang mau dijadikan admin");
+					    this._sendMessage(seq,"Silahkan Tag Orangnya");
 					break;
 					case 'del':
 					    vx[2] = "arg2";vx[3] = txt;xtxt = "「 Admin List 」\n\n";
@@ -927,10 +723,10 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 					let msg = new Message();msg.to = seq.to;
 					if(isAdminOrBot(pment)){
 						waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-						msg.text = cot[1]+" , dia udah jadi admin bang...";
+						msg.text = "「𝙁𝘼𝙄𝙇𝙀𝘿」 "+cot[1]+" Telah Masuk Daftar Admin";
 						this._client.sendMessage(0,msg);
 					}else{
-						msg.text = "Done !";
+						msg.text = "「𝙎𝙐𝘾𝘾𝙀𝙎𝙎」 Berhasil Menambahkan Kedaftar Admin";
 						this._client.sendMessage(0, msg);
 				        myBot.push(pment);
 						waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
@@ -939,10 +735,10 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 					let midnya = seq.contentMetadata.mid;let msg = new Message();msg.to = seq.to;
 					if(isAdminOrBot(midnya)){
 						waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-						msg.text = "Dia sudah masuk daftar admin...";
+						msg.text = "「𝙁𝘼𝙄𝙇𝙀𝘿」 Target Telah Masuk Daftar Admin";
 						this._client.sendMessage(0, msg);
 					}else{
-						msg.text = "Done !";
+						msg.text = "「𝙎𝙐𝘾𝘾𝙀𝙎𝙎」 Berhasil Menambahkan Kedaftar Admin";
 						this._client.sendMessage(0, msg);
 				        myBot.push(midnya);
 						waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
@@ -950,9 +746,9 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				}else if(panjang.length > 30 && panjang[0] == "u"){
 					if(isAdminOrBot(txt)){
 						waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-						this._sendMessage(seq,"Dia sudah masuk daftar banlist...");
+						this._sendMessage(seq,"「𝙁𝘼𝙄𝙇𝙀𝘿」 Target Telah Masuk Daftar Banlist");
 					}else{
-						let msg = new Message();msg.to = seq.to;msg.text = "Sudah bosku !";
+						let msg = new Message();msg.to = seq.to;msg.text = "「𝙎𝙐𝘾𝘾𝙀𝙎𝙎」 Berhasil Menambahkan Kedaftar Banlist";
 						this._client.sendMessage(0, msg);
 				        myBot.push(txt);
 						waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
@@ -969,7 +765,7 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				}
 			}
 		}
-		if(txt == "!adminutil" && isAdminOrBot(seq.from_)){
+		if(txt == "adminutil" && isAdminOrBot(seq.from_)){
 			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
 			    waitMsg = "yes";
 			    vx[0] = seq.from_;vx[1] = txt;
@@ -979,44 +775,9 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
 				this._sendMessage(seq,"#CANCELLED");
 			}
-		}else if(txt == "!adminutil" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
+		}else if(txt == "adminutil" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-		if(vx[1] == "!sms" && seq.from_ == vx[0] && waitMsg == "yes"){
-			let panjang = txt.split("");
-			if(txt == "cancel"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}else if(panjang.length >= 12 && vx[2] == "arg1"){
-				vx[4] = txt;
-				vx[2] = "arg2";
-				this._sendMessage(seq,"Ok apa pesan yang akan dikirim ?");
-			}else if(vx[2] == "arg2"){
-				this._xgetJson("http://dataninja.biz/","/dev/sms_api.php?kirimsms=kirim&nomor="+vx[4]+"&message="+textMessages,(result) => {
-					if(result.err===true){
-						this._sendMessage(seq,"Error:\n"+result.message);
-					}else{
-						this._sendMessage(seq,result.message);
-					}
-				});
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";vx[4] = "";
-			}else{
-				this._sendMessage(seq,"# How to !sms\nKirim nomor orang yang dituju !");
-			}
-		}
-		if(txt == "!sms" && !isBanned(banList,seq.from_)){
-			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
-			    waitMsg = "yes";
-			    vx[0] = seq.from_;vx[1] = txt;
-			    this._sendMessage(seq,"SMS ke siapa ?");
-				vx[2] = "arg1";
-				this._sendMessage(seq,"# Kirim nomor yang dituju");
-			}else{
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}
-		}else if(txt == "!sms" && isBanned(banList,seq.from_)){this._sendMessage(seq,"Not permitted !");}
-
-		if(vx[1] == "!unban" && seq.from_ == vx[0] && waitMsg == "yes"){
+		if(vx[1] == "unban" && seq.from_ == vx[0] && waitMsg == "yes"){
 			let panjang = txt.split("");
 			if(txt == "cancel"){
 				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
@@ -1031,10 +792,10 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
                         banList.splice(ment, 1);
                     }
 					waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-					bang.text = "Sudah bosku";
+					bang.text = "「𝙎𝙐𝘾𝘾𝙀𝙎𝙎」 Berhasil Menghapus Dari Daftar Banlist";
 					this._client.sendMessage(0,bang);
 				}else{
-					bang.text = "Dia gk masuk daftar banned bos !";
+					bang.text = "「𝙁𝘼𝙄𝙇𝙀𝘿」 Target Tidak Masuk Daftar Banlist";
 					this._client.sendMessage(0, bang);
 				}
 			}else if(seq.contentType == 13){
@@ -1045,10 +806,10 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
                         banList.splice(ment, 1);
                     }
 					waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-					bang.text = "Sudah bosku";
+					bang.text = "「𝙎𝙐𝘾𝘾𝙀𝙎𝙎」 Berhasil Menghapus Dari Daftar Banlist";
 					this._client.sendMessage(0,bang);
 				}else{
-					bang.text = "Dia gk masuk daftar banned bos !";
+					bang.text = "「𝙁𝘼𝙄𝙇𝙀𝘿」 Target Tidak Masuk Daftar Banlist";
 					this._client.sendMessage(0, bang);
 				}
 			}else if(panjang.length > 30 && panjang[0] == "u"){
@@ -1059,16 +820,16 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
                         banList.splice(ment, 1);
                     }
 					waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-					bang.text = "Sudah bosku";
+					bang.text = "「𝙎𝙐𝘾𝘾𝙀𝙎𝙎」 Berhasil Menghapus Dari Daftar Banlist";
 					this._client.sendMessage(0,bang);
 				}else{
-					this._sendMessage(seq,"Dia gk masuk daftar banned bos !");
+					this._sendMessage(seq,"「𝙁𝘼𝙄𝙇𝙀𝘿」 Target Tidak Masuk Daftar Banlist");
 				}
 			}else{
-				this._sendMessage(seq,"# How to !unban\nKirim kontaknya / mid / tag orangnya yang mau di-unban");
+				this._sendMessage(seq,"Ketik unban lalu tag orangnya");
 			}
 		}
-		if(txt == "!unban" && isAdminOrBot(seq.from_)){
+		if(txt == "unban" && isAdminOrBot(seq.from_)){
 			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
 			    waitMsg = "yes";
 			    vx[0] = seq.from_;vx[1] = txt;
@@ -1084,9 +845,9 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
 				this._sendMessage(seq,"#CANCELLED");
 			}
-		}else if(txt == "!unban" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
+		}else if(txt == "unban" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-		if(txt == "!banlist"){
+		if(txt == "banlist"){
 			seq.text = "[Mid] [Name]\n\n";
 			for(var i = 0; i < banList.length; i++){
 			    let orangnya = await this._getContacts([banList[i]]);
@@ -1095,442 +856,31 @@ vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
 			this._sendMessage(seq,seq.text);
 		}
 
-		if(txt == "!left" && isAdminOrBot(seq.from_)){
+		if(txt == "bubar" && isAdminOrBot(seq.from_)){
+			this._sendMessage(seq,""+displayName+" Pamit")
 			this._client.leaveGroup(0,seq.to);
 		}
-
-		if(vx[1] == "!youtube" && seq.from_ == vx[0] && waitMsg == "yes"){
-			if(txt == "cancel"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}else if(vx[2] == "arg1" && linktxt[1]){
-				vx[3] = '';vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";
-				let dlUrl = "http"+linktxt[1];let tspl = textMessages.split("youtu.be/");
-				if(tspl || typeof tspl !== "undefined"){
-					dlUrl = "https://m.youtube.com/watch?v="+tspl[1];
-				}
-				let downloader = this.config.YT_DL;let hasil = '';
-				let infDl = new Message();
-				infDl.to = seq.to;
-				var options = {
-             	   uri: downloader,
-             	   qs: {url: dlUrl},
-            	   json: true // Automatically parses the JSON string in the response
-            	};
-
-            	await rp(options)
-           	  	  .then(function (repos) {
-           	          hasil = repos;
-            	})
-             	  .catch(function (err) {
-           	    });
-				if(hasil == "Error: no_media_found"){
-			    	infDl.text = "Gagal bang !, mungkin url-nya salah...";
-				}else{
-					let title = hasil.title;
-					let urls = hasil.urls;
-					infDl.text = "[ Youtube Downloader ]\nTitle: "+title+"\n";
-					for(var i = 0; i < urls.length; i++){
-						let idU = await this.gooGl(urls[i].id);
-						infDl.text += "\n\
-Info: "+urls[i].label+"\n\
-Link Download: "+idU.id+"\n";
-					}
-				}
-				this._sendMessage(seq,infDl.text);
-			} else {
-				this._sendMessage(seq,"# How to !youtube\nKirim link youtubenya !");
-			}
-		}
-		if(txt == "!youtube" && !isBanned(seq.from_)){
-			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
-				waitMsg = "yes";
-			    vx[0] = seq.from_;vx[1] = txt;
-			    this._sendMessage(seq,"Mau download video youtube bang ? OK, kirim link youtubenya !");
-				vx[2] = "arg1";
-			}else{
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}
-		}else if(txt == "!youtube" && isBanned(seq.from_)){this._sendMessage(seq,"Not permitted !");}
-
-		if(vx[1] == "!animesearch" && seq.from_ == vx[0] && waitMsg == "yes"){
-			if(txt == "cancel"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}else if(vx[2] == "arg1" && seq.contentType == 1){
-				vx[2] = "arg2";vx[3] = seq.id;
-				let hasil;let hasiltxt = "「 Anime Guess 」\n\n";
-				this._download("https://obs-sg.line-apps.com/talk/m/download.nhn?oid="+seq.id+"&tid=original","img",0,(result) => {
-					const filepath = path.resolve(result);
-                    //let buffx = fs.readFileSync(filepath);
-                    // convert binary data to base64 encoded string
-					//let cmx = new command();
-                    this._base64Image(filepath, (result) => {
-					//let base64IMG = result.toString('base64');
-					let data = {
-					   method: 'POST',
-             		   uri: "https://whatanime.ga/search",
-             		   form: {
-						   data: result,
-            		       filter: "*",
-					       trial: 4},
-					   headers: {
-                           'Host':'whatanime.ga',
-                           'accept':'application/json, text/javascript, */*; q=0.01',
-                           'content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-                           'origin':'https://whatanime.ga',
-                           'referer':'https://whatanime.ga/',
-                           'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
-                           'x-requested-with':'XMLHttpRequest'
-                       },
-            		   //json: true // Automatically parses the JSON string in the response
-            		};
-					this._animePost(data,(result) => {
-						let ret = [];let M = new Message();M.to = seq.to;
-						for(var i = 0; i < result.docs.length; i++){
-							let xdocx = result.docs[i];
-							let anime = xdocx.anime;
-							let season = xdocx.season;
-							let filex = xdocx.file;
-							let startx = xdocx.start;
-							let endx = xdocx.end;
-							let tokenx = xdocx.token;
-							let tokenThumb = xdocx.tokenthumb;
-							let tox = xdocx.to;
-							let url_r = "https://whatanime.ga/"+season+"/"+encodeURI(anime)+"/"+encodeURI(filex)+"/?start="+startx+"&end="+endx+"&token="+tokenx;
-							let url_t = "https://whatanime.ga/thumbnail.php?season="+season+"&anime="+encodeURI(anime)+"&file="+encodeURI(filex)+"&t="+tox+"&token="+tokenx;
-							let xret = {
-								video: url_r,
-								thumbnail: url_t,
-								anime_name: anime,
-								season: season
-							};ret.push(xret);
-							hasiltxt += "Name: "+anime+"\nSeason: "+season+"\n\
-\n";
-						}
-						M.text = hasiltxt;
-						this._client.sendMessage(0,M);
-
-					})
-				})})
-			}else if(vx[2] == "arg2" && txt == "page2"){
-				vx[2] = "arg3";
-				let hasil;let hasiltxt = "「 Anime Guess 」\n\n";
-				this._download("https://obs-sg.line-apps.com/talk/m/download.nhn?oid="+vx[3]+"&tid=original","img",0,(result) => {
-					const filepath = path.resolve(result);
-                    //let buffx = fs.readFileSync(filepath);
-                    // convert binary data to base64 encoded string
-					//let cmx = new command();
-                    this._base64Image(filepath, (result) => {
-					//let base64IMG = result.toString('base64');
-					let data = {
-					   method: 'POST',
-             		   uri: "https://whatanime.ga/search",
-             		   form: {
-						   data: result,
-            		       filter: "*",
-					       trial: 5},
-					   headers: {
-                           'Host':'whatanime.ga',
-                           'accept':'application/json, text/javascript, */*; q=0.01',
-                           'content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-                           'origin':'https://whatanime.ga',
-                           'referer':'https://whatanime.ga/',
-                           'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
-                           'x-requested-with':'XMLHttpRequest'
-                       },
-            		   //json: true // Automatically parses the JSON string in the response
-            		};
-					this._animePost(data,(result) => {
-						let ret = [];let M = new Message();M.to = seq.to;
-						for(var i = 0; i < result.docs.length; i++){
-							let xdocx = result.docs[i];
-							let anime = xdocx.anime;
-							let season = xdocx.season;
-							let filex = xdocx.file;
-							let startx = xdocx.start;
-							let endx = xdocx.end;
-							let tokenx = xdocx.token;
-							let tokenThumb = xdocx.tokenthumb;
-							let tox = xdocx.to;
-							let url_r = "https://whatanime.ga/"+season+"/"+encodeURI(anime)+"/"+encodeURI(filex)+"/?start="+startx+"&end="+endx+"&token="+tokenx;
-							let url_t = "https://whatanime.ga/thumbnail.php?season="+season+"&anime="+encodeURI(anime)+"&file="+encodeURI(filex)+"&t="+tox+"&token="+tokenx;
-							let xret = {
-								video: url_r,
-								thumbnail: url_t,
-								anime_name: anime,
-								season: season
-							};ret.push(xret);
-							hasiltxt += "Name: "+anime+"\nSeason: "+season+"\n\
-\n";
-						}
-						M.text = hasiltxt;
-						this._client.sendMessage(0,M);
-
-					})
-				})})
-			} else if(vx[2] == "arg3" && txt == "page3"){
-				vx[2] = "arg4";
-				let hasil;let hasiltxt = "「 Anime Guess 」\n\n";
-				this._download("https://obs-sg.line-apps.com/talk/m/download.nhn?oid="+vx[3]+"&tid=original","img",0,(result) => {
-					const filepath = path.resolve(result);
-                    //let buffx = fs.readFileSync(filepath);
-                    // convert binary data to base64 encoded string
-					//let cmx = new command();
-                    this._base64Image(filepath, (result) => {
-					//let base64IMG = result.toString('base64');
-					let data = {
-					   method: 'POST',
-             		   uri: "https://whatanime.ga/search",
-             		   form: {
-						   data: result,
-            		       filter: "*",
-					       trial: 6},
-					   headers: {
-                           'Host':'whatanime.ga',
-                           'accept':'application/json, text/javascript, */*; q=0.01',
-                           'content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-                           'origin':'https://whatanime.ga',
-                           'referer':'https://whatanime.ga/',
-                           'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
-                           'x-requested-with':'XMLHttpRequest'
-                       },
-            		   //json: true // Automatically parses the JSON string in the response
-            		};
-					this._animePost(data,(result) => {
-						let ret = [];let M = new Message();M.to = seq.to;
-						for(var i = 0; i < result.docs.length; i++){
-							let xdocx = result.docs[i];
-							let anime = xdocx.anime;
-							let season = xdocx.season;
-							let filex = xdocx.file;
-							let startx = xdocx.start;
-							let endx = xdocx.end;
-							let tokenx = xdocx.token;
-							let tokenThumb = xdocx.tokenthumb;
-							let tox = xdocx.to;
-							let url_r = "https://whatanime.ga/"+season+"/"+encodeURI(anime)+"/"+encodeURI(filex)+"/?start="+startx+"&end="+endx+"&token="+tokenx;
-							let url_t = "https://whatanime.ga/thumbnail.php?season="+season+"&anime="+encodeURI(anime)+"&file="+encodeURI(filex)+"&t="+tox+"&token="+tokenx;
-							let xret = {
-								video: url_r,
-								thumbnail: url_t,
-								anime_name: anime,
-								season: season
-							};ret.push(xret);
-							hasiltxt += "Name: "+anime+"\nSeason: "+season+"\n\
-\n";
-						}
-						M.text = hasiltxt;
-						this._client.sendMessage(0,M);
-
-					})
-				})})
-			} else if(vx[2] == "arg4" && txt == "page4"){
-				let hasil;let hasiltxt = "「 Anime Guess 」\n\n";
-				this._download("https://obs-sg.line-apps.com/talk/m/download.nhn?oid="+vx[3]+"&tid=original","img",0,(result) => {
-					const filepath = path.resolve(result);
-                    //let buffx = fs.readFileSync(filepath);
-                    // convert binary data to base64 encoded string
-					//let cmx = new command();
-                    this._base64Image(filepath, (result) => {
-					//let base64IMG = result.toString('base64');
-					let data = {
-					   method: 'POST',
-             		   uri: "https://whatanime.ga/search",
-             		   form: {
-						   data: result,
-            		       filter: "*",
-					       trial: 7},
-					   headers: {
-                           'Host':'whatanime.ga',
-                           'accept':'application/json, text/javascript, */*; q=0.01',
-                           'content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-                           'origin':'https://whatanime.ga',
-                           'referer':'https://whatanime.ga/',
-                           'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
-                           'x-requested-with':'XMLHttpRequest'
-                       },
-            		   //json: true // Automatically parses the JSON string in the response
-            		};
-					this._animePost(data,(result) => {
-						let ret = [];let M = new Message();M.to = seq.to;
-						for(var i = 0; i < result.docs.length; i++){
-							let xdocx = result.docs[i];
-							let anime = xdocx.anime;
-							let season = xdocx.season;
-							let filex = xdocx.file;
-							let startx = xdocx.start;
-							let endx = xdocx.end;
-							let tokenx = xdocx.token;
-							let tokenThumb = xdocx.tokenthumb;
-							let tox = xdocx.to;
-							let url_r = "https://whatanime.ga/"+season+"/"+encodeURI(anime)+"/"+encodeURI(filex)+"/?start="+startx+"&end="+endx+"&token="+tokenx;
-							let url_t = "https://whatanime.ga/thumbnail.php?season="+season+"&anime="+encodeURI(anime)+"&file="+encodeURI(filex)+"&t="+tox+"&token="+tokenx;
-							let xret = {
-								video: url_r,
-								thumbnail: url_t,
-								anime_name: anime,
-								season: season
-							};ret.push(xret);
-							hasiltxt += "Name: "+anime+"\nSeason: "+season+"\n\
-\n";
-						}
-						M.text = hasiltxt;
-						this._client.sendMessage(0,M);
-						this._sendMessage(seq,"Max page 4");
-						vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-
-					})
-				})})
-			} else if(vx[2] == "arg2" && txt !== "page2"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"# STOPPED");
-			} else if(vx[2] == "arg3" && txt !== "page3"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"# STOPPED");
-			} else if(vx[2] == "arg4" && txt !== "page4"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"# STOPPED");
-			} else {
-				this._sendMessage(seq,"# How to !animesearch\nKirim gambarnya yang akan dicari !");
-			}
-		}
-		if(txt == "!animesearch" && !isBanned(seq.from_)){
-			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
-				waitMsg = "yes";
-			    vx[0] = seq.from_;vx[1] = txt;
-			    this._sendMessage(seq,"Mau cari anime pake gambar bang ? OK, kirim gambarnya !");
-				vx[2] = "arg1";
-			}else{
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}
-		}else if(txt == "!animesearch" && isBanned(seq.from_)){this._sendMessage(seq,"Not permitted !");}
-
-
-		if(vx[1] == "!tts" && seq.from_ == vx[0] && waitMsg == "yes"){
-			if(vx[2] == "arg1"){
-				this._sendMessage(seq,"Ok, kirim text-nya");
-				vx[2] = "arg2";vx[3] = txt;
-			}else if(vx[2] == "arg2" && /^[A-Za-z0-9 ]+$/.test(textMessages)){
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";
-				switch(vx[3]){
-					case 'id':
-					    this._textToSpeech(textMessages,"id",(res)=>{
-							this._sendFile(seq,res,3)
-						})
-						vx[3] = "";
-					break;
-					case 'en':
-					    this._textToSpeech(textMessages,"en",(res)=>{
-							this._sendFile(seq,res,3)
-						})
-						vx[3] = "";
-					break;
-					default:
-					    this._sendMessage(seq,"Bahasa tidak diketahui !");
-						vx[3] = "";
-					break;
-				}
-			}else if(vx[2] == "arg2"){
-				this._sendMessage(seq,"Char yang hanya diperbolehkan:\nA-Z (no case sensitive)\n0-9 (number)");
-			}
-		}
-		if(txt == "!tts" && !isBanned(seq.from_)){
-			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
-				waitMsg = "yes";
-			    vx[0] = seq.from_;vx[1] = txt;
-			    await this._sendMessage(seq,"Text to Speech adalah sebuah fitur dimana sebuah text dirubah menjadi sebuah suara.\nCara menggunakan: kirim text-nya yang akan dijadikan suara !");
-				this._sendMessage(seq,"Pilih bahasa:\n- Inggris = en\n- Indonesia = id");
-				vx[2] = "arg1";
-			}else{
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}
-		}else if(txt == "!tts" && isBanned(seq.from_)){this._sendMessage(seq,"Not permitted !");}
-
-		if(vx[1] == "!yousound" && seq.from_ == vx[0] && waitMsg == "yes"){
-			if(txt == "cancel"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}else if(vx[2] == "arg1" && linktxt[1]){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				let messagex = "「 Youtube Converter 」\n\n";
-				let M = new Message();
-				M.to = seq.to;
-				this._youSound(textMessages,(result)=>{
-					if(result.status == "ok"){
-						let title = result.title;
-						let time = this._timeParse(result.length);
-						let xurl = result.url.replace("//","http://");
-						this.gooGl(xurl).then((rex)=>{
-							messagex += "Title: "+title+"\nDuration: "+time+"\nDownload link: "+rex.id;
-						    M.text = messagex;
-						    this._client.sendMessage(0,M);
-							this._sendMessage(seq,rex.id);
-						})
-					}else{
-						this._sendMessage(seq,"Error: "+result.message);
-					}
-				});
-			}else if(vx[2] == "arg1" && !linktxt[1]){
-				this._sendMessage(seq,"# How to !yousound:\nKirimi link youtube-nya yang akan dikonversi");
-			}
-		}
-		if(txt == "!yousound" && !isBanned(seq.from_)){
-			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
-				waitMsg = "yes";
-			    vx[0] = seq.from_;vx[1] = txt;
-			    await this._sendMessage(seq,"Ingin download video youtube dalam bentuk mp3 ?");
-				this._sendMessage(seq,"Ok, kirim link-nya");
-				vx[2] = "arg1";
-			}else{
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}
-		}else if(txt == "!yousound" && isBanned(seq.from_)){this._sendMessage(seq,"Not permitted !");}
-
-		if(vx[1] == "!botleft" && seq.from_ == vx[0] && waitMsg == "yes"){
-			if(txt == "cancel"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}else if(txt == "group" && vx[2] == "arg1"){
-				vx[3] = txt;
-				this._sendMessage(seq,"OK, Apa nama groupnya bang ?");
-				vx[2] = "arg2";
-			}else if(vx[3] == "group" && vx[2] == "arg2"){
-				vx[0] = "";vx[1] = "";waitMsg = "no";vx[2] = "";vx[3] = "";
-				this.leftGroupByName(textMessages);
-			}
-		}
-		if(txt == "!botleft" && isAdminOrBot(seq.from_)){
-			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
-				waitMsg = "yes";
-			    vx[0] = seq.from_;vx[1] = txt;
-			    this._sendMessage(seq,"Left dari ? #group");
-				vx[2] = "arg1";
-			}else{
-				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
-				this._sendMessage(seq,"#CANCELLED");
-			}
-		}else if(txt == "!botleft" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
-
-		if(txt == "!mute" && isAdminOrBot(seq.from_)){
+		
+		if(txt == "mute" && isAdminOrBot(seq.from_)){
 			this.stateStatus.mute = 1;
 			this._sendMessage(seq,"(*´﹃｀*)")
 		}
 
-        if(txt == '!cancel' && this.stateStatus.cancel == 1 && isAdminOrBot(seq.from_)) {
-            this.cancelAll(seq.to);
-        }else if(txt == "!cancel" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
+        if(txt == 'opraken' && this.stateStatus.cancel == 1 && isAdminOrBot(seq.from_)) {
+        	  let { listMember } = await this.searchGroup(seq.to);
+            for (var i = 0; i < listMember.length; i++) {
+                if(!isAdminOrBot(listMember[i].mid)){
+                  this.cancelAll(seq.to,[listMember[i].mid]);
+                }
+            }
+        }else if(txt == "opraken" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-        if(txt == '!halo') {
+        if(txt == 'absen') {
 			let { mid, displayName } = await this._client.getProfile();
-            this._sendMessage(seq, 'สวัสดี'+displayName);
+            this._sendMessage(seq, ''+displayName+' Hadir');
         }
 
-		if(vx[1] == "!grouputil" && seq.from_ == vx[0] && waitMsg == "yes"){
+		if(vx[1] == "grouputil" && seq.from_ == vx[0] && waitMsg == "yes"){
 			if(vx[2]=="arg1"){
 			let M = new Message();
 			let listGroups = await this._client.getGroupIdsJoined();
@@ -1585,7 +935,7 @@ Link Download: "+idU.id+"\n";
 				}else{this._sendMessage(seq,"Group tidak ada !");}
 			}
 		}
-		if(txt == "!grouputil" && isAdminOrBot(seq.from_)){
+		if(txt == "grouputil" && isAdminOrBot(seq.from_)){
 			if(vx[2] == null || typeof vx[2] === "undefined" || !vx[2]){
 				waitMsg = "yes";
 			    vx[0] = seq.from_;vx[1] = txt;
@@ -1595,39 +945,21 @@ Link Download: "+idU.id+"\n";
 				waitMsg = "no";vx[0] = "";vx[1] = "";vx[2] = "";vx[3] = "";
 				this._sendMessage(seq,"#CANCELLED");
 			}
-		}else if(txt == "!grouputil" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
+		}else if(txt == "grouputil" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-		if(cox[0] == "broadcast" && isAdminOrBot(seq.from_) && cox[1]){
-            let listMID = [];
-            let bcText = textMessages.split(" ").slice(1).toString().replace(/,/g , " ");
-            let bcm = new Message();
-            bcm.toType = 0;
-            let listContacts = await this._client.getAllContactIds();listMID.push(listContacts);
-	        let listGroups = await this._client.getGroupIdsJoined();listMID.push(listGroups);
-			for(var i = 0; i < listMID.length; i++){
-		        for(var xi = 0; xi <listMID[i].length; xi++){
-		        	bcm.to = listMID[i][xi];
-                    let midc = listMID[i][xi].split("");
-                    if(midc[0] == "u"){bcm.toType = 0;}else if(midc[0] == "c"){bcm.toType = 2;}else if(midc[0] == "r"){bcm.toType = 1;}else{bcm.toType = 0;}
-                    bcm.text = bcText;
-                    this._client.sendMessage(0, bcm);
-	        	}
-            }
-        }else if(cox[0] == "broadcast" && isAdminOrBot(seq.from_) && !cox[1]){this._sendMessage(seq,"# How to broadcast:\nbroadcast yourtexthere");}else if(cox[0] == "broadcast" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted!");}
-
-		if(txt == "!kickme" && seq.toType == 2 && !isBanned(banList, seq.from_) && this.stateStatus.kick == 1){
+		if(txt == "vykhodi" && seq.toType == 2 && !isBanned(banList, seq.from_) && this.stateStatus.kick == 1){
 			this._sendMessage(seq,"Ok bang !");
 			this._kickMember(seq.to,[seq.from_]);
-		}else if(txt == '!kickme' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
+		}else if(txt == 'vykhodi' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
 
-		if(txt == "!refresh" && isAdminOrBot(seq.from_)){
+		if(txt == "refresh" && isAdminOrBot(seq.from_)){
 			this._sendMessage(seq, "Clean all message....");
 			await this._client.removeAllMessages();
 			this._sendMessage(seq, "Done !");
 		}
 
-        const sp = ['!speed','sp','speed','resp','respon'];
+        const sp = ['speed','sp','speed','resp','respon'];
         if(sp.includes(txt) && !isBanned(banList, seq.from_)) {
 			const curTime = (Date.now() / 1000);let M = new Message();M.to=seq.to;M.text = '';M.contentType = 1;M.contentPreview = null;M.contentMetadata = null;
 			await this._client.sendMessage(0,M);
@@ -1636,13 +968,13 @@ Link Download: "+idU.id+"\n";
             this._sendMessage(seq, xtime+' second');
         }else if(sp.includes(txt) && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-        if(txt == '!speed' && !isBanned(banList, seq.from_)) {
+        if(txt == 'speed' && !isBanned(banList, seq.from_)) {
 			const curTime = Math.floor(Date.now() / 1000);let M = new Message();M.to=seq.to;M.text = '';M.contentType = 1;M.contentPreview = null;M.contentMetadata = null;
 			await this._client.sendMessage(0,M);
 			const rtime = Math.floor(Date.now() / 1000);
             const xtime = rtime	- curTime;
             this._sendMessage(seq, xtime+' second');
-        }else if(txt == '!speed' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
+        }else if(txt == 'speed' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
         /*if(txt === 'kernel') {
             exec('uname -a;ptime;id;whoami',(err, sto) => {
@@ -1650,25 +982,19 @@ Link Download: "+idU.id+"\n";
             })
         }*/
 
-        if(txt === '!kickall' && this.stateStatus.kick == 1 && isAdminOrBot(seq.from_) && seq.toType == 2) {
+        if(txt === 'opraken' && this.stateStatus.kick == 1 && isAdminOrBot(seq.from_) && seq.toType == 2) {
             let { listMember } = await this.searchGroup(seq.to);
             for (var i = 0; i < listMember.length; i++) {
                 if(!isAdminOrBot(listMember[i].mid)){
                     this._kickMember(seq.to,[listMember[i].mid])
                 }
             }
-        }else if(txt === '!kickall' && !isAdminOrBot(seq.from_) && seq.toType == 2){this._sendMessage(seq,"Not permitted !");}
+        }else if(txt === 'opraken' && !isAdminOrBot(seq.from_) && seq.toType == 2){this._sendMessage(seq,"Not permitted !");}
 
-		if(txt == '!key') {
+		if(txt == 'help') {
 			let botOwner = await this._client.getContacts([myBot[0]]);
             let { mid, displayName } = await this._client.getProfile();
-			let key2 = "\n\
-====================\n\
-| BotName   : "+displayName+"\n\
-| BotID     : \n["+mid+"]\n\
-| BotStatus : Working\n\
-| BotOwner  : "+botOwner[0].displayName+"\n\
-====================\n";
+			let key2 = "";
 			seq.text = key2 += this.keyhelp;
 			this._client.sendMessage(0, seq);
 		}
@@ -1678,7 +1004,7 @@ Link Download: "+idU.id+"\n";
             for (var i = 0; i < listMember.length; i++) {
                 if(listMember[i].mid==param){
 					let namanya = listMember[i].dn;
-					seq.text = 'Halo @'+namanya+', Selamat datang bro !';
+					seq.text = 'Welcome';
 					let midnya = listMember[i].mid;
 					let kata = seq.text.split("@").slice(0,1);
 					let kata2 = kata[0].split("");
@@ -1700,9 +1026,14 @@ Link Download: "+idU.id+"\n";
             }
         }
 
-		if(txt == "!tagall" && seq.toType == 2 && !isBanned(banList, seq.from_)){
-			await this.tagAlls(seq);
-		}else if(txt == '!tagall' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
+		if(txt == "tagall" && seq.toType == 2 && !isBanned(banList, seq.from_)){
+         let { listMember } = await this.searchGroup(seq.to);
+         for (var i = 0; i < listMember.length; i++) {
+              if(!isAdminOrBot(listMember[i].mid)){
+                 this.tagAlls(seq.to,[listMember[i].mid]);
+              }
+         }
+		}else if(txt == 'tagall' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
 		if(txt == '0103' && lockt == 1){
 			let ax = await this._client.getGroup(seq.to);
@@ -1767,49 +1098,16 @@ Link Download: "+idU.id+"\n";
             this.checkReader = [];
         }
 
-		if(txt == '!botcontact'){
-			let probot = await this._client.getProfile();
-			let settings = await this._client.getSettings();
-			let emailbot = settings.identityIdentifier;
-			let M = new Message();M.to = seq.to;
-			M.text = 'Bot Name: '+probot.displayName+'\nBot LINE_ID: line://ti/p/'+probot.userid+'\nBot CONTACT_TICKET: http://line.me/ti/p/'+settings.contactMyTicket+'\nBot Email: hidden for some reason ^_^';
-			this._client.sendMessage(0,M);
-		}
-
-		if(cox[0] == "!getimage" && linktxt[1] && !isBanned(banList,seq.from_)){//getimage http://url.com/image.png
-			var that = this;
-			let dir = __dirname+this.config.FILE_DOWNLOAD_LOCATION;
-			cox[1] = "http"+linktxt[1].replace(/\\/g , "");
-			rp.head(cox[1], (err, res, body) => {
-			  let url = res.headers['content-type'].split("/");let extA = url[url.length-1].split(";");let extF = extA[0];
-			  let namef = dir+"/img."+extF;
-			  if(isImg(extF)){
-					rp(cox[1]).pipe(fs.createWriteStream(namef)).on('close',
-					  ()=>{
-						  if(extF == "webp"){
-							  webp.dwebp(namef,dir+"/img.jpg","-o",function(){that._sendImageWithURL(seq,cox[1],"jpg",dir+"/img.jpg");});
-						  }else{
-							  this._sendImageWithURL(seq,cox[1],extF,namef);
-						  }
-					  });
-		      }else{let aM = new Message();aM.to = seq.to;aM.text = "Gagal, ekstensi file tidak diperbolehkan !";this._client.sendMessage(0,aM);}
-		    });
-		}else if(cox[0] == "!getimage" && linktxt[1] && isBanned(banList,seq.from_)){this._sendMessage(seq,"Not permitted!");}else if(cox[0] == "!getimage" && !linktxt[1] && !isBanned(banList,seq.from_)){this._sendMessage(seq,"# How to !getimage:\ngetimage http://url.com/image.png");}
-
-		if(cox[0] == "album" && isAdminOrBot(seq.from_)){
-			await this._createAlbum(seq.to,cox[1],this.config.chanToken);
-		}
-
-		if(txt == "!kickban" && isAdminOrBot(seq.from_)){
+		if(txt == "kickban" && isAdminOrBot(seq.from_)){
 			for(var i = 0; i < banList.length; i++){
 				let adaGk = await this.isInGroup(seq.to, banList[i]);
 				if(typeof adaGk !== "undefined" && adaGk){
 					this._kickMember(seq.to,adaGk);
 				}
 			}
-		}else if(txt == "!kickban" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
+		}else if(txt == "kickban" && !isAdminOrBot(seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-		if(txt == "!setting"){
+		if(txt == "setting"){
 			this.setState(seq,1)
 		}
 
@@ -1818,7 +1116,7 @@ Link Download: "+idU.id+"\n";
             this.setState(seq,0)
         }
 
-        if(txt == '!myid' /*|| txt == 'mid' || txt == 'id'*/) {
+        if(txt == 'myid' /*|| txt == 'mid' || txt == 'id'*/) {
             this._sendMessage(seq,"ID Kamu: "+seq.from_);
         }
 
@@ -1828,16 +1126,7 @@ Link Download: "+idU.id+"\n";
             })
         }*/
 
-		if(txt == "!whattime" && !isBanned(banList,seq.from_)){
-			let d = new Date();let xmenit = d.getMinutes().toString().split("");
-			if(xmenit.length < 2){
-				this._sendMessage(seq, d.getHours()+":0"+d.getMinutes());
-			}else{
-				this._sendMessage(seq, d.getHours()+":"+d.getMinutes());
-			}
-		}
-
-		if(txt == '!ginfo' && !isBanned(banList, seq.from_)) {
+		if(txt == 'ginfo' && !isBanned(banList, seq.from_)) {
             let groupInfo = await this._client.getGroup(seq.to);let gqr = 'open';let ticketg = 'line://ti/g/';
 			let createdT64 = groupInfo.createdTime.toString().split(" ");
 			let createdTime = await this._getServerTime(createdT64[0]);
@@ -1860,20 +1149,20 @@ Link Download: "+idU.id+"\n";
 			let bang = new Message();
 			bang.to = seq.to;
 
-			bang.text = "# Group Name:\n"+gname+"\n\
-\n# Group ID:\n"+gid+"\n\
-\n# Group Creator:\n"+gcreator+"\n\
-\n# Group CreatedTime:\n"+createdTime+"\n\
-\n# Group Ticket:\n"+ticketg+"\n\
-\n# Member: "+memberCount+"\n\
-\n# Pending: "+pendingCount+"\n\
-\n# QR: "+gqr+"\n\
-\n# Group Cover:\nhttp://dl.profile.line.naver.jp/"+gcover;
+			bang.text = "Group Name:\n"+gname+"\n\
+Group ID:\n"+gid+"\n\
+Group Creator:\n"+gcreator+"\n\
+Group CreatedTime:\n"+createdTime+"\n\
+Group Ticket:\n"+ticketg+"\n\
+Member: "+memberCount+"\n\
+Pending: "+pendingCount+"\n\
+QR: "+gqr+"\n\
+Group Cover:\nhttp://dl.profile.line.naver.jp/"+gcover;
             this._client.sendMessage(0,bang);
-        }else if(txt == '!ginfo' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
+        }else if(txt == 'ginfo' && isBanned(banList, seq.from_)){this._sendMessage(seq,"Not permitted !");}
 
-        const joinByUrl = ['!gurl','!curl'];
-        if(joinByUrl.includes(txt) && txt == "!gurl") {
+        const joinByUrl = ['gurl','curl'];
+        if(joinByUrl.includes(txt) && txt == "gurl") {
             this._sendMessage(seq,`Updating group ...`);
             let updateGroup = await this._getGroup(seq.to);//console.info(updateGroup);
             if(updateGroup.preventJoinByTicket === true) {
@@ -1882,7 +1171,7 @@ Link Download: "+idU.id+"\n";
             }
 			const groupUrl = await this._reissueGroupTicket(seq.to)
             this._sendMessage(seq,`Line group = line://ti/g/${groupUrl}`);
-        }else if(joinByUrl.includes(txt) && txt == "!curl") {
+        }else if(joinByUrl.includes(txt) && txt == "curl") {
             this._sendMessage(seq,`Updating group ...`);
             let updateGroup = await this._getGroup(seq.to);//console.info(updateGroup);
             if(updateGroup.preventJoinByTicket === false) {
@@ -1915,7 +1204,7 @@ Link Download: "+idU.id+"\n";
 			}else{this._client.inviteIntoGroup(0,seq.to,[param]);}
 		}
 
-		if(gTicket[0] == "!join" && isAdminOrBot(seq.from_)){
+		if(gTicket[0] == "join" && isAdminOrBot(seq.from_)){
 			let sudah = "no";
 			let grp = await this._client.findGroupByTicket(gTicket[1]);
 			let lGroup = await this._client.getGroupIdsJoined();
@@ -1925,7 +1214,9 @@ Link Download: "+idU.id+"\n";
 				}
 			}
 			if(sudah == "ya"){
-				let bang = new Message();bang.to = seq.to;bang.text = "Gagal join bang, eneng udah masuk groupnya";
+				let bang = new Message();
+				bang.to = seq.to;
+				bang.text = "";
 				this._client.sendMessage(0,bang);
 			}else if(sudah == "no"){
 				await this._acceptGroupInvitationByTicket(grp.id,gTicket[1]);
