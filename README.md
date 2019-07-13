@@ -1,6 +1,9 @@
 How to run ?
 ------
+- pkg install nodejs -y
+- pkg install git -y
 - git clone https://github.com/MrYoung249/LINE-KickBot1
+- pkg install nano
 - cd LINE-KickBot1 && npm install
 - npm start
 -----
