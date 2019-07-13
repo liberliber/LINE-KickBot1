@@ -7,16 +7,15 @@ class LINE extends Command {
         this.receiverID = '';
         this.checkReader = [];
         this.stateStatus = {
-            cancel: 1,
+            cancel: 0,
             kick: 1,
-            salam: 1
         };
         this.messages;
         this.payload
     }
 
     get myBot() {
-        const bot = ['u1d55aeaa8b863cb338f4e8fd7a761b4b','u1d55aeaa8b863cb338f4e8fd7a761b4b'];
+        const bot = ['u1d55aeaa8b863cb338f4e8fd7a761b4b'];
         return bot; 
     }
 
@@ -47,10 +46,11 @@ class LINE extends Command {
                 return this._acceptGroupInvitation(operation.param1);
             }
         }
+        
         if(operation.type == 16 && this.stateStatus.salam == 1){
 		     	let halo = new Message();
 		    	halo.to = operation.param1;
-			    halo.text = "opraken";
+			    halo.text = "kkabeh";
 			    this._client.sendMessage(0, halo);
 		    }
         this.getOprationType(operation);
@@ -81,11 +81,7 @@ class LINE extends Command {
         let sender = messages.from;
         
         this.command('sp', this.getSpeed.bind(this));
-        this.command(`opraken ${payload}`,this.kickAll.bind(this));
-        this.command(`opraken ${payload}`,this.cancelAll.bind(this));
-        this.command(`destruirlo ${payload}`,this.spamGroup.bind(this));
-        this.command(`destruirlo ${payload}`,this.youngSpamGroup.bind(this));
-
+        this.command(`kkabeh ${payload}`,this.kickAll.bind(this));
     }
 
 }
