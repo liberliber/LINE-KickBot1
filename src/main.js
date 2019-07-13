@@ -83,7 +83,7 @@ class LINE extends Command {
         let receiver = messages.to;
         let sender = messages.from;
         
-        this.command('.speed', this.getSpeed.bind(this));
+        this.command('speed', this.getSpeed.bind(this));
         this.command(`kkabeh ${payload}`,this.kickAll.bind(this));
     }
 

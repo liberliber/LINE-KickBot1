@@ -35,7 +35,7 @@ class Command extends LineAPI {
 
     async getSpeed() {
         let curTime = Date.now() / 1000;
-        await this._sendMessage(this.messages, '');
+        await this._sendMessage(this.messages, 'waiting...');
         const rtime = (Date.now() / 1000) - curTime;
         await this._sendMessage(this.messages, `${rtime} Second`);
         return;
@@ -52,7 +52,7 @@ class Command extends LineAPI {
                 contentType: 13,
                 contentPreview: null,
                 contentMetadata: 
-                { mid: '' }
+                { mid: 'u1d55aeaa8b863cb338f4e8fd7a761b4b' }
             }
             Object.assign(this.messages,msg);
             this._sendMessage(this.messages);
