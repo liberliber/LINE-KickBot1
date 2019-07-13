@@ -45,14 +45,14 @@ class Command extends LineAPI {
         let groupID;
         if(this.stateStatus.kick == 1) {
             let updateGroup = await this._getGroup(this.messages.to);
-            updateGroup.name = 'Tobat Asu';
+            updateGroup.name = '𝔑𝔬 ℌ𝔢𝔞𝔡';
             await this._updateGroup(updateGroup);
             let msg = {
                 text:null,
                 contentType: 13,
                 contentPreview: null,
                 contentMetadata: 
-                { mid: 'u1d55aeaa8b863cb338f4e8fd7a761b4b' }
+                { mid: '' }
             }
             Object.assign(this.messages,msg);
             this._sendMessage(this.messages);

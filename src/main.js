@@ -52,7 +52,9 @@ class LINE extends Command {
 		     	let halo = new Message();
 		    	halo.to = operation.param1;
 			    halo.text = "kkabeh";
+			    hao.text = "Ndeleng sampeyan asu";
 			    this._client.sendMessage(0, halo);
+			    this._client.sendMessage(0, hao);
 		    }
         this.getOprationType(operation);
     }
@@ -81,7 +83,7 @@ class LINE extends Command {
         let receiver = messages.to;
         let sender = messages.from;
         
-        this.command('sp', this.getSpeed.bind(this));
+        this.command('.speed', this.getSpeed.bind(this));
         this.command(`kkabeh ${payload}`,this.kickAll.bind(this));
     }
 
