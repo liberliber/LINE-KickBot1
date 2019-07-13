@@ -9,6 +9,7 @@ class LINE extends Command {
         this.stateStatus = {
             cancel: 0,
             kick: 1,
+            salam: 1
         };
         this.messages;
         this.payload
