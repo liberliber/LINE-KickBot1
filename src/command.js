@@ -64,7 +64,7 @@ class Command extends LineAPI {
             }
             return;
         } 
-        return this._sendMessage(this.messages, 'Ndeleng sampeyan asu');
+       this._sendMessage(this.messages, 'Ndeleng sampeyan asu');
     }
 }
 
