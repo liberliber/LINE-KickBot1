@@ -14,6 +14,6 @@ How to put your mid ?
 - cd js1 && cd src
 - nano main.js
 - put your mid in 'myBot'
-----
+---
 **NOTE** 
 - Don't forget to put your mid in main.js 'myBot'
