@@ -84,7 +84,7 @@ class LineAPI {
   _qrCodeLogin() {
     this.setTHttpClient();
     return new Promise((resolve, reject) => {
-    this._client.getAuthQrcode(true, 'MB-JSKICKER',(err, result) => {
+    this._client.getAuthQrcode(true, 'N0HE4D-YOUNG',(err, result) => {
       const qrcodeUrl = `line://au/q/${result.verifier}`;
       qrcode.generate(qrcodeUrl,{small: true});
       console.info(`\n\nlink qr code is: ${qrcodeUrl}`)
@@ -132,7 +132,7 @@ class LineAPI {
          reqx.password = rsaCrypto.credentials;
          reqx.keepLoggedIn = true;
          reqx.accessLocation = this.config.ip;
-         reqx.systemName = 'MB-JSKICKER';
+         reqx.systemName = 'Js-Kicker';
          reqx.e2eeVersion = 0;
          try{
            this._client.loginZ(reqx,
