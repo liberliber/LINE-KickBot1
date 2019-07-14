@@ -1,5 +1,5 @@
 {
-  "name": "alphat-new-generation",
+  "name": "LINE-KickBot1",
   "version": "0.6.9",
   "description": "LINE",
   "main": "./src/main.js",
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/m.rakha.f/alphat-new-generation.git"
+    "url": "github.com/MrYoung249/"
   },
-  "author": "GoogleX <haxor-133@protonmail.com>",
+  "author": "Young <mr.y774@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "qrcode-terminal": "^0.11.0",
@@ -29,9 +29,9 @@
     "moment": "^2.18.1"
   },
   "bugs": {
-    "url": "https://gitlab.com/m.rakha.f/alphat-new-generation/issues"
+    "url": "https://github.com/MrYoung249/LINE-KickBot1/issues"
   },
-  "homepage": "https://gitlab.com/m.rakha.f/alphat-new-generation#README",
+  "homepage": "https://github.com/MrYoung249/LINE-KickBot1/",
   "keywords": [
     "line"
   ]
