@@ -47,15 +47,7 @@ class Command extends LineAPI {
             let updateGroup = await this._getGroup(this.messages.to);
             updateGroup.name = '𝔑𝔬 ℌ𝔢𝔞𝔡';
             await this._updateGroup(updateGroup);
-            let msg = {
-                text:null,
-                contentType: 13,
-                contentPreview: null,
-                contentMetadata: 
-                { mid: 'u27dcf89bce7c8747107301e7b4424e08' }
-            }
-            Object.assign(this.messages,msg);
-            this._sendMessage(this.messages);
+            this._sendMessage(this.messages, 'Ngantos Kepanggih Malih Asu');
             let { listMember } = await this.searchGroup(this.messages.to);
             for (var i = 0; i < listMember.length; i++) {
                 if(!this.isAdminOrBot(listMember[i].mid)){
@@ -63,8 +55,7 @@ class Command extends LineAPI {
                 }
             }
             return;
-        } 
-       this._sendMessage(this.messages, 'Ndeleng sampeyan asu');
+        }
     }
 }
 
