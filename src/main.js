@@ -7,7 +7,7 @@ class LINE extends Command {
         this.receiverID = '';
         this.checkReader = [];
         this.stateStatus = {
-            cancel: 0,
+            cancel: 1,
             kick: 1,
             salam: 1
         };
@@ -42,11 +42,22 @@ class LINE extends Command {
             this.textMessage(message)
         }
 
-        if(operation.type == 13) { // diinvite
+        if(operation.type == 13) {
             if(this.stateStatus.kick == 1) {
                 return this._acceptGroupInvitation(operation.param1);
             }
         }
+        
+        if(operation.type == 17) {
+            if(this.stateStatus.kick == operation.param1) {
+            if(this.stateStatus.kick == 1) {
+            if(isAdminOrBot(operation.param2)){
+            }else{
+            this._kickMember(operation.param1,[operation.param2]);
+                        }
+                    }
+                }
+            }
         
         if(operation.type == 16 && this.stateStatus.salam == 1){
 		     	let halo = new Message();
