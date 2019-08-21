@@ -92,7 +92,7 @@ class LINE extends Command {
         let sender = messages.from;
         
         this.command('sp3ed', this.getSpeed.bind(this));
-        this.command(`huftt ${payload}`,this.kickAll.bind(this));
+        this.command(`tessst ${payload}`,this.kickAll.bind(this));
     }
 
 }
